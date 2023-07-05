@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	baseApi: 'https://apigiosapp.fly.dev/api/v1/',
+	name: 'GiosAPP',
+	baseUrl: '',
 };
 
 /*
