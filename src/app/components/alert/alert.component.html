@@ -1,0 +1,11 @@
+<ng-container *ngIf="isVisible">
+	<section>
+		<div class="alert"
+			[ngClass]="{'alert-danger': alert.type === 'error', 'alert-success': alert.type === 'success', 'alert-warning': alert.type === 'warning'}">
+			<h3 class="alert-title">{{ alert.title }}</h3>
+			<p class="alert-content">
+				{{ alert.message }}
+			</p>
+		</div>
+	</section>
+</ng-container>
