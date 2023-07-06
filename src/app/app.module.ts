@@ -8,9 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
+import { SetTimeDifferencePipe } from './core/pipes/set-time-difference.pipe';
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, SetTimeDifferencePipe],
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(),
