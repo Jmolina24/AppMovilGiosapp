@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { OrderDetail } from 'src/app/core/interfaces/order-detail';
 import { OrdersService } from 'src/app/core/services/order.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { Order } from 'src/app/interfaces/order';
 
 @Component({
@@ -12,17 +13,21 @@ import { Order } from 'src/app/interfaces/order';
 })
 export class ViewInfoPage implements OnInit {
 	public order!: Order;
-	public detailOrder!: OrderDetail[];
+	public detailOrder: OrderDetail[] = [];
+
+	public idrole: number = 1;
 
 	private activatedRoute = inject(ActivatedRoute);
 	private platform = inject(Platform);
 
 	constructor(
-		private _activatedRoute: ActivatedRoute,
+		private _storage: StorageService,
 		private api: OrdersService
 	) {}
 
 	ngOnInit() {
+		this.idrole = this._storage.getRolID();
+
 		const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
 
 		this.api.get({ idorden: id }).subscribe((r) => (this.order = r[0]));

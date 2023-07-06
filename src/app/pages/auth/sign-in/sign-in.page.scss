@@ -39,9 +39,11 @@
 .input-item .input-password .icon{
 	font-size: 20px;
 	background-color: #A6ABB1;
-	padding: 7px;
+	padding: 5px;
 	border-radius: 50%;
 	color: #fff;
+	width: 27px;
+	margin-right: 10px;
 }
 
 .ion-item {
@@ -68,41 +70,4 @@ ion-footer {
 
 .copyright {
 	text-align: center;
-}
-
-
-
-
-.button {
-	display: flex;
-	align-items: center;
-	padding: 6px 16px;
-	font-weight: 600;
-	line-height: 1.5rem;
-	font-size: 0.75rem;
-	border-radius: 0375rem;
-	color: #fff;
-	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 150ms;
-}
-
-.button:hover {
-	background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
-}
-
-.button svg {
-	animation: spin 1s linear infinite;
-	margin-left: -0.25rem;
-	margin-right: 0.75rem;
-	width: 18px;
-	margin-right: 10px;
-}
-
-.button svg path {
-	opacity: 0.75;
-}
-
-.button svg circle {
-	opacity: 0.25;
 }

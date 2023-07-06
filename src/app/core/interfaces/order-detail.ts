@@ -29,4 +29,5 @@ export interface OrderDetail {
 	observacion: string;
 	estado: string;
 	codigoestado: string;
+	showInfo: boolean;
 }
