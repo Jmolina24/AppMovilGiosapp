@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { StorageService } from './storage.service';
+import { Order } from 'src/app/interfaces/order';
+import { OrderDetail } from '../interfaces/order-detail';
 
 @Injectable({
 	providedIn: 'root',
@@ -20,7 +22,7 @@ export class OrdersService {
 		idcliente?: string;
 		idclientesede?: string;
 		estado?: 'T' | string;
-	} = {}): Observable<any[]> {
+	} = {}): Observable<Order[]> {
 		idcliente = String(
 			this._storage.getRolID() !== 1
 				? this._storage.getUser().idcliente || '0'
@@ -82,7 +84,7 @@ export class OrdersService {
 		idclientesede?: string;
 		idtercero?: string;
 		estado?: 'T' | string;
-	} = {}): Observable<any[]> {
+	} = {}): Observable<OrderDetail[]> {
 		idcliente = String(
 			this._storage.getRolID() !== 1
 				? this._storage.getUser().idcliente || '0'

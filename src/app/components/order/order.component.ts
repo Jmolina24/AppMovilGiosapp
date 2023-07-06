@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Order } from 'src/app/interfaces/order';
+import { differenceInDays } from 'date-fns';
+
 
 @Component({
 	selector: 'app-order',
@@ -9,12 +11,20 @@ import { Order } from 'src/app/interfaces/order';
 })
 export class OrderComponent implements OnInit {
 	private platform = inject(Platform);
-	@Input() message?: Order;
-	isIos() {
-		return this.platform.is('ios');
-	}
+	@Input() order!: Order;
 
 	constructor() {}
 
 	ngOnInit() {}
+
+	isIos() {
+		return this.platform.is('ios');
+	}
+
+	calculateDaysElapsed(fromDate: string): number {
+		const today = new Date();
+		const _fromDate = new Date(fromDate);
+		return differenceInDays(today, _fromDate);
+	  }
+
 }

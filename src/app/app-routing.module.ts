@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoAuthGuard } from './core/guards/no-auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 	{
 		path: '',
 		loadChildren: () =>
 			import('./pages/home/home.module').then((m) => m.HomePageModule),
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'view-info/:id',
@@ -13,6 +16,7 @@ const routes: Routes = [
 			import('./pages/view-info/view-info.module').then(
 				(m) => m.ViewInfoPageModule
 			),
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'sign-in',
@@ -20,6 +24,7 @@ const routes: Routes = [
 			import('./pages/auth/sign-in/sign-in.module').then(
 				(m) => m.SignInPageModule
 			),
+		canActivate: [NoAuthGuard],
 	},
 ];
 @NgModule({
