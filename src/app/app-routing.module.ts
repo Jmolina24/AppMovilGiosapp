@@ -19,6 +19,13 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 	},
 	{
+		path: 'view-info-detail/:idorden/:iddetalleorden',
+		loadChildren: () =>
+			import('./pages/view-info-detail/view-info-detail.module').then(
+				(m) => m.ViewInfoDetailPageModule
+			),
+	},
+	{
 		path: 'sign-in',
 		loadChildren: () =>
 			import('./pages/auth/sign-in/sign-in.module').then(

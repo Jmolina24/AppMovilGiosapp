@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Order } from 'src/app/interfaces/order';
 import { differenceInDays } from 'date-fns';
 
+import { Order } from 'src/app/interfaces/order';
 
 @Component({
-	selector: 'app-order',
+	selector: 'app-order-c',
 	templateUrl: './order.component.html',
 	styleUrls: ['./order.component.scss'],
 })
@@ -25,6 +25,5 @@ export class OrderComponent implements OnInit {
 		const today = new Date();
 		const _fromDate = new Date(fromDate);
 		return differenceInDays(today, _fromDate);
-	  }
-
+	}
 }

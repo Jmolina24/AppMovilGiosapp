@@ -16,12 +16,9 @@ const routes: Routes = [
 					).then((m) => m.ManageOrdersPageModule),
 			},
 			{
-				path: 'create-orders',
-				loadChildren: () =>
-					import(
-						'./../../modules/home/create-orders/create-orders.module'
-					).then((m) => m.CreateOrdersPageModule),
-			},
+				path: 'order',
+				loadChildren: () => import('./../../modules/home/order/order.module').then( m => m.OrderPageModule)
+			  },
 			{
 				path: 'profile',
 				loadChildren: () =>
