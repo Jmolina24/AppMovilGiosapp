@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-title>Perfil</ion-title>
-	</ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+	<ion-list lines="none">
+		<ion-item>
+			<img src="assets/logo/logo.png" style="height: 40px;">
+		</ion-item>
+	</ion-list>
 
-<ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
-		<ion-toolbar>
-			<ion-title size="large">profile</ion-title>
-		</ion-toolbar>
-	</ion-header>
+	<div style="margin-bottom: 40px; margin-top:10%">
+		<ion-avatar style="margin: auto;width: 25vh;height: 25vh;">	
+			<img src="../../../assets/img/user.png">
+		</ion-avatar>
+	</div>
+
+	<ion-label class="ion-text-center">
+		<h1 class="style-subtitle">{{data.nombre}}</h1>
+		<p class="state">{{data.rol}}</p>		
+	</ion-label>
+
+	<ion-button class="text-transform-initial style-button-action"
+				shape="round"
+				style="margin-top: 30px;"
+				(click)="signOut()">Cerrar Session</ion-button> 
+
 </ion-content>

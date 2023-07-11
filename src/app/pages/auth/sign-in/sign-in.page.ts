@@ -62,9 +62,6 @@ export class SignInPage implements OnInit {
 		this.auth.signIn(this.formData.value).subscribe(
 			
 			(response: any) => {
-				// this.setOpen(true)
-				console.log('********************************************************');
-				console.log(response.error);
 				if (response.codigo == 1) {
 					this.presentAlert(response.mensaje );
 					return;

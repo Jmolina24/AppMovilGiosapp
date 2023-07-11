@@ -26,5 +26,120 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
+@import 'theme/fonts.scss';
+
 /* Tailwind */
 @import './tailwind.scss';
+
+.text-decoration{
+    text-decoration:none;
+}
+
+.text-transform-initial{
+    text-transform: initial!important;
+}
+
+.text-transform-capitalize{
+    text-transform: capitalize!important;
+}
+.d-flex {
+    display: flex !important;
+}
+
+/*  Style new Theme */
+ .style-ion-title{    
+    font-weight: bold!important;
+    color: #1068af!important; 
+    font-family: "Poppins-title";
+}
+ion-title{
+    font-family: "Poppins-title";
+    font-size: 15px;
+}
+h1{
+    // font-size: 33px!important;
+    font-weight: bold!important;
+    color: #1068af!important; 
+    font-family: "Poppins-title";
+}
+
+.style-subtitle{
+    font-size: 16px!important;    
+    color: #1068af!important; 
+    font-family: "Poppins-subtitle";
+}
+.style-button-action{
+    margin-left: auto;
+    margin-right: auto;
+    display: table;   
+}
+p{         
+    font-family: "Poppins-paragraph";   
+    color: #000000; 
+}
+a{
+    color: #1068af!important; 
+}
+
+
+ion-button{
+    font-size: 20px;
+}
+
+ion-label{
+    color: #000000!important;
+    font-family: "Poppins-paragraph"!important;   
+}
+
+ion-avatar{
+    border: 3px solid #1068af !important;
+    width: 8vh;
+    height:8vh;
+}
+
+.color-blue{
+    color: #1068af!important; 
+}
+
+.itemenu{
+    font-family: "Poppins-paragraph";   
+    color: #1068af!important; 
+}
+
+.login{
+    text-align: center;
+    font-size: 13px;
+    // margin-top: 5px;    
+}
+
+
+.img-cajacacopi{    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+}
+
+
+.card-thumb{
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 45vh;
+    height: 45vh;
+    box-shadow: none;
+  }
+  .list-card{
+    height: 100%;
+    white-space: nowrap;
+  }
+  
+
+  .icon-close-modal{
+    font-size: 30px!important;
+    margin-right: 10px!important;
+  }
+  
+  .ion-no-margin{
+      margin: 0!important;
+  }

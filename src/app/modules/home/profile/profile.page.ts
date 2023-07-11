@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  data: any;
+  constructor(
+    private _storage: StorageService,
+    private _router: Router
+  ) {
 
-  constructor() { }
+
+  }
 
   ngOnInit() {
+    this.data = this._storage.getUser();
   }
+
+
+	signOut(): void {
+		this._storage.signOut();
+		this._router.navigate(['/sign-in']);
+	}
+
+
 
 }
