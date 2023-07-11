@@ -26,6 +26,13 @@ const routes: Routes = [
 			),
 	},
 	{
+		path: 'add-order',
+		loadChildren: () =>
+			import('./pages/add-order/add-order.module').then(
+				(m) => m.AddOrderPageModule
+			),
+	},
+	{
 		path: 'sign-in',
 		loadChildren: () =>
 			import('./pages/auth/sign-in/sign-in.module').then(

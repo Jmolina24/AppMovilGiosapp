@@ -1,0 +1,132 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>Crear Orden</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-list>
+		<ion-item>
+			<ion-select placeholder="Seleccione" [(ngModel)]="data.idtipoorden">
+				<div slot="label">Tipo de orden <ion-text color="danger">(Requerido)</ion-text></div>
+				<ng-container *ngFor="let item of listTypes">
+					<ion-select-option [value]="item.idtipoorden">{{ item.nombre }}</ion-select-option>
+				</ng-container>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-select placeholder="Seleccione" [(ngModel)]="data.idcliente" (ionChange)="getSites(data.idcliente)">
+				<div slot="label">Cliente <ion-text color="danger">(Requirido)</ion-text></div>
+				<ng-container *ngFor="let item of listCustomers">
+					<ion-select-option [value]="item.idcliente">{{ item.razonsocial }}</ion-select-option>
+				</ng-container>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-select placeholder="Seleccione" [(ngModel)]="data.idclientesede" [disabled]="listSites.length === 0">
+				<div slot="label">Sede <ion-text color="danger">(Requirido)</ion-text></div>
+				<ng-container *ngFor="let item of listSites">
+					<ion-select-option [value]="item.idclientesede">{{ item.cliensede }}</ion-select-option>
+				</ng-container>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<div slot="label">Fecha y hora de entrega <ion-text color="danger">(Requirido)</ion-text></div>
+			<ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+			<ion-modal [keepContentsMounted]="true">
+				<ng-template>
+					<ion-datetime id="datetime" [(ngModel)]="data.fechaentrega"></ion-datetime>
+				</ng-template>
+			</ion-modal>
+		</ion-item>
+
+		<ion-item>
+			<ion-textarea label="Observación" placeholder="..." [(ngModel)]="data.observacion"></ion-textarea>
+		</ion-item>
+
+		<ion-item>
+			<ion-button type="button"
+				class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm"
+				(click)="addService = true">
+				Servicio
+				<ion-icon name="add-outline"></ion-icon>
+			</ion-button>
+		</ion-item>
+	</ion-list>
+
+	<ion-list class="px-4 m-2">
+		<ng-container *ngFor="let item of listDetails">
+			<span id="badge-dismiss-default"
+				class="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-blue-800 bg-blue-100 rounded">
+				{{ getNameService(item.idservicio) }} ({{ item.cantidad }})
+				<button (click)="removeDetail(item.idservicio)" type="button"
+					class="inline-flex items-center p-0.5 ml-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900"
+					data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
+					<svg aria-hidden="true" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+							clip-rule="evenodd"></path>
+					</svg>
+					<span class="sr-only">Remove badge</span>
+				</button>
+			</span>
+		</ng-container>
+	</ion-list>
+
+
+	<ng-container *ngIf="addService">
+		<ion-list>
+			<ion-item>
+				<ion-select placeholder="Seleccione" [(ngModel)]="dataDetail.idservicio">
+					<div slot="label">Servicio <ion-text color="danger">(Requirido)</ion-text></div>
+					<ng-container *ngFor="let item of listServices">
+						<ion-select-option [value]="item.idservicio">{{ item.nombre }}</ion-select-option>
+					</ng-container>
+				</ion-select>
+			</ion-item>
+
+			<ion-item>
+				<ion-input label="Cantidad" [(ngModel)]="dataDetail.cantidad"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-input label="Referencia" [(ngModel)]="dataDetail.referencia"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-textarea label="Observación" placeholder="..." [(ngModel)]="dataDetail.observacion"></ion-textarea>
+			</ion-item>
+
+			<ion-item>
+				<ion-buttons [collapse]="true" slot="end">
+					<ion-button class="bg-orange-400 rounded-md shadow-sm text-white" (click)="fnAddDetails()">
+						Agregar
+					</ion-button>
+				</ion-buttons>
+			</ion-item>
+
+		</ion-list>
+	</ng-container>
+</ion-content>
+
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-buttons [collapse]="true" slot="start" class="pl-5">
+			<ion-button class="bg-red-400 rounded-md shadow-sm text-white" [routerLink]="['/order']">
+				Cancelar
+			</ion-button>
+		</ion-buttons>
+
+		<ion-buttons [collapse]="true" slot="end" class="pr-5">
+			<ion-button class="bg-blue-400 rounded-md shadow-sm text-white" (click)="fnCreate()">
+				Crear
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-footer>

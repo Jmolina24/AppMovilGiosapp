@@ -24,9 +24,13 @@ export class DetailOrderComponent implements OnInit {
 		return this.platform.is('ios');
 	}
 
-	calculateDaysElapsed(fromDate: string): number {
+	calculateDaysElapsed(fromDate: string): string {
 		const today = new Date();
 		const _fromDate = new Date(fromDate);
-		return differenceInDays(today, _fromDate);
+		const _d = differenceInDays(today, _fromDate);
+		if (_d === 0) {
+			return 'hoy';
+		}
+		return (_d < 0 ? 'dentro ' : 'hace ') + (_d < 0 ? -_d : _d) + ' dia(s)';
 	}
 }

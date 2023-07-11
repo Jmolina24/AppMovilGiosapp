@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-title>Orden</ion-title>
+		<ion-buttons [collapse]="true" slot="end">
+			<ion-button class="bg-blue-400 rounded-md shadow-sm text-white" [routerLink]="['/add-order']">
+				<ion-icon name="add-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
