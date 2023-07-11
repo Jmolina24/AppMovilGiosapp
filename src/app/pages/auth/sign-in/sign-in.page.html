@@ -1,59 +1,29 @@
-<ion-content [fullscreen]="true">
-	<div class="text-center w-full py-10 px-2">
-		<div class="w-full flex justify-center items-center px-32 mb-10">
-			<img src="../../../../assets/logo/logo.png" alt="logo_img">
+<ion-content>
+	<div class="login-section ion-padding">
+		<div class="heading ion-padding">
+			<img src="/assets/logo/logo.png" alt="">
 		</div>
-		<!-- <p class="subtitle">¡Inicia sesión para continuar!</p> -->
-		<span class="text-4xl font-extrabold tracking-tight leading-tight">Ingreso</span>
-
-		<ion-row *ngIf="alert">
-			<app-alert [alert]="alert"></app-alert>
-		</ion-row>
-
 		<form [formGroup]="formData">
-			<ion-item lines="none" class="ion-item">
-				<fieldset class="input-item">
-					<legend>Nombre de usuario</legend>
-					<ion-input formControlName="username" type="text" placeholder="User_123"></ion-input>
-				</fieldset>
-			</ion-item>
-			<ion-item lines="none" class="ion-item">
-				<fieldset class="input-item">
-					<legend>Contraseña</legend>
-					<div class="input-password">
-						<ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"
-							placeholder="*******"></ion-input>
-						<ng-container [ngSwitch]="showPassword">
-							<ng-container *ngSwitchCase="true">
-								<ion-icon class="icon-size-5 icon" name="close-outline"
-									(click)="fnShowPassword()"></ion-icon>
-							</ng-container>
-
-							<ng-container *ngSwitchCase="false">
-								<ion-icon class="icon-size-5 icon" name="eye-outline" (click)="fnShowPassword()"></ion-icon>
-							</ng-container>
-						</ng-container>
-					</div>
-				</fieldset>
-			</ion-item>
-
-			<ion-button type="button"
-				class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150"
-				[ngClass]="{'cursor-not-allowed': isLoading}" (click)="signIn()">
-				<svg *ngIf="isLoading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-					xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-					<path class="opacity-75" fill="currentColor"
-						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-					</path>
-				</svg>
-				{{ isLoading? 'Cargando...' : 'Ingresar'}}
-			</ion-button>
-		</form>
+		<div class="login-form ion-padding">
+			<div class="form-input">
+				<ion-icon name="mail-outline"></ion-icon>
+				<ion-item>
+					<ion-label position="floating">Usuario</ion-label>					
+					<ion-input formControlName="username" type="text"></ion-input>
+				</ion-item>
+			</div>
+			<div class="form-input">
+				<ion-icon name="lock-closed-outline"></ion-icon>
+				<ion-item>
+					<ion-label position="floating">Contraseña</ion-label>
+					<ion-input formControlName="password" type="password"></ion-input>
+				</ion-item>
+			</div>
+			<div class="action-buttons ion-padding">
+				<ion-button size="large" class="login-button" (click)="signIn()"> Iniciar Session </ion-button>
+				<p>Olvide mi contraseña ?</p>
+			</div>
+		</div>
+	</form>
 	</div>
 </ion-content>
-<ion-footer color="white">
-	<ion-toolbar>
-		<p class="copyright">Creado con ❤️</p>
-	</ion-toolbar>
-</ion-footer>
