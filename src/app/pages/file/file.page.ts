@@ -17,6 +17,8 @@ export class FilePage implements OnInit {
 	@Input() iddetalleorden: any = '';
 	@Input() title = 'Cargar Soporte';
 
+	@Input() action: 'upload' | 'view' = 'view';
+
 	@Output() selectionCancel = new EventEmitter<void>();
 	@Output() selectionChange = new EventEmitter<void>();
 
@@ -45,6 +47,7 @@ export class FilePage implements OnInit {
 
 		this.files = [];
 		this.listFiles = [];
+		console.log(this.items);
 	}
 
 	trackItems(index: number, item: any) {
