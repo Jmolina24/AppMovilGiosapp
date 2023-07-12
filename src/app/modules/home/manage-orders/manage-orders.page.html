@@ -5,5 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+	<ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
+		color="light" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 	<app-detail-order *ngFor="let item of list" [detail]="item"></app-detail-order>
 </ion-content>

@@ -11,6 +11,7 @@ import { Order } from 'src/app/interfaces/order';
 })
 export class ManageOrdersPage implements OnInit {
 	list: OrderDetail[] = [];
+	filteredList: OrderDetail[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 
 	constructor(private _api: OrdersService, private _storage: StorageService) {}
@@ -20,6 +21,18 @@ export class ManageOrdersPage implements OnInit {
 	}
 
 	get(): void {
-		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => this.list = r);
+		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => {
+			this.list = r;
+			this.filteredList = r;
+			
+		  });
 	}
+
+
+	buscar(event: any) {
+		const textoBusqueda = event.target.value;
+		this.list = this.filteredList.filter(item => item.tipoorden.includes(textoBusqueda));
+	  }
+
+
 }
