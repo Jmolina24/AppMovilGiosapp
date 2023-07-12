@@ -1,0 +1,99 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="cancelChanges()">Regresar</ion-button>
+		</ion-buttons>
+		<ion-title>{{ title }}</ion-title>
+	</ion-toolbar>
+	<ion-toolbar *ngIf="items.length > 0">
+		<ion-searchbar (ionInput)="searchbarInput($event)"></ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="ion-padding">
+	<ion-list id="modal-list" [inset]="true" *ngIf="items.length > 0; else noContent">
+		<ion-accordion-group>
+			<ion-accordion [value]="item.iddetalleordensoporte" *ngFor="let item of filteredItems; trackBy: trackItems" [disabled]="item.soporte || getIfExitsIdDetailSoporte(item.iddetalleordensoporte)">
+				<ion-item slot="header" color="light">
+					<ion-label>{{
+						item.tiposoporte }}</ion-label>
+				</ion-item>
+				<div class="ion-padding" slot="content">
+					<ion-item>
+						<ion-button expand="full">
+							<input type="file" (change)="onFileChange($event.target, item.iddetalleordensoporte)"
+								id="file-input" accept="image/png, image/jpeg" multiple>
+						</ion-button>
+					</ion-item>
+
+					<ion-item>
+						<ion-button type="ion-button"
+							class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2">
+							Cargar
+						</ion-button>
+					</ion-item>
+				</div>
+			</ion-accordion>
+		</ion-accordion-group>
+
+	</ion-list>
+	<ng-container *ngIf="files.length > 0">
+		<div class="max-h-36 overflow-y-auto">
+			<ng-container *ngFor="let item of files; let i = index">
+				<ion-list>
+					<ng-container *ngFor="let file of item.files">
+						<ion-item>
+							<div class="w-full my-2">
+								<span id="badge-dismiss-default"
+									class="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-blue-800 bg-blue-100 rounded">
+									{{ file.file.name }} - {{ getNameDetailSoporte(item.iddetalleordensoporte)
+									}}
+									<button (click)="deleteFile(file, i)" type="button"
+										class="inline-flex items-center p-0.5 ml-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900"
+										data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
+										<svg aria-hidden="true" class="w-3.5 h-3.5" fill="currentColor"
+											viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd"
+												d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+												clip-rule="evenodd"></path>
+										</svg>
+										<span class="sr-only">Remove badge</span>
+									</button>
+								</span>
+							</div>
+						</ion-item>
+					</ng-container>
+				</ion-list>
+			</ng-container>
+		</div>
+	</ng-container>
+	<ng-template #noContent>
+		No hay tercero
+	</ng-template>
+</ion-content>
+
+
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-buttons [collapse]="true" slot="start" class="pl-5">
+			<ion-button class="bg-red-400 rounded-md shadow-sm text-white" [routerLink]="['/order']">
+				Cancelar
+			</ion-button>
+		</ion-buttons>
+
+		<ion-buttons [collapse]="true" slot="end" class="pr-5">
+			<ion-button class="bg-blue-400 rounded-md shadow-sm text-white" (click)="fnUpload()"
+				[disabled]="files.length === 0 || isLoading">
+				<svg *ngIf="isLoading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" f
+					xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+					<path class="opacity-75" fill="currentColor"
+						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+					</path>
+				</svg>
+				{{ isLoading ? 'Cargando...' : 'Cargar'}}
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-footer>

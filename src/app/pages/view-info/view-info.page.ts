@@ -14,7 +14,10 @@ import { Order } from 'src/app/interfaces/order';
 })
 export class ViewInfoPage implements OnInit {
 	@ViewChild('modal', { static: true }) modal!: IonModal;
+
+
 	isOpen = false;
+	isOpenFile = false;
 
 	public order!: Order;
 	public detailOrder: OrderDetail[] = [];
@@ -31,6 +34,8 @@ export class ViewInfoPage implements OnInit {
 
 	private idorden: any = '';
 
+	public listSupport: any[] = [];
+
 	constructor(
 		private _storage: StorageService,
 		private api: OrdersService,
@@ -40,7 +45,9 @@ export class ViewInfoPage implements OnInit {
 	ngOnInit() {
 		this.idrole = this._storage.getRolID();
 
-		this.idorden = this.activatedRoute.snapshot.paramMap.get('id') as string;
+		this.idorden = this.activatedRoute.snapshot.paramMap.get(
+			'id'
+		) as string;
 
 		this.get();
 	}
@@ -62,6 +69,7 @@ export class ViewInfoPage implements OnInit {
 	selectionChanged(item: any) {
 		this.selected = item;
 		this.isOpen = false;
+		this.isOpenFile = false;
 
 		this.get();
 	}
@@ -75,5 +83,59 @@ export class ViewInfoPage implements OnInit {
 
 				this.isOpen = true;
 			});
+	}
+
+	getDetailSupportSelect(
+		iddetalleorden: string | number,
+		action: 'upload' | 'view'
+	): void {
+		this.isOpenFile = false
+		this.api.getSupports({ iddetalleorden }).subscribe((response) => {
+			if (action === 'view') {
+				this.listSupport = response
+					.filter(({ estado }) => estado === 'CARGADO')
+					.map((r: any) => {
+						try {
+							r.soporte = JSON.parse(r.soporte || '[]');
+							if (Array.isArray(r.soporte)) {
+								r.soporte = r.soporte.map(
+									(t: string, index: number) => {
+										const url =
+											'https://demo.mainsoft.technology' +
+											t.split('/web')[1];
+										const y = url.split('.');
+										const tipo =
+											y[y.length - 1].toUpperCase();
+										const supportObject = {
+											tipo,
+											soporte: url,
+											index:
+												r.iddetalleordensoporte +
+												'-' +
+												(index + 1),
+										};
+										return supportObject;
+									}
+								);
+							} else {
+								r.soporte = [];
+							}
+						} catch (error) {
+							r.soporte = [];
+						}
+						return r;
+					})
+					.reduce(
+						(accumulator: any[], r: any) =>
+							accumulator.concat(
+								r.soporte.map((t: any) => ({ ...r, ...t }))
+							),
+						[]
+					);
+				return;
+			}
+			this.listSupport = response;
+			this.isOpenFile = true;
+		});
 	}
 }
