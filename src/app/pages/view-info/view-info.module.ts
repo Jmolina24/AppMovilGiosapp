@@ -8,6 +8,7 @@ import { ViewInfoPageRoutingModule } from './view-info-routing.module';
 
 import { ViewInfoPage } from './view-info.page';
 import { SetTimeDifferencePipe } from 'src/app/core/pipes/set-time-difference.pipe';
+import { AssignPage } from '../assign/assign.page';
 
 @NgModule({
 	imports: [
@@ -16,6 +17,6 @@ import { SetTimeDifferencePipe } from 'src/app/core/pipes/set-time-difference.pi
 		IonicModule,
 		ViewInfoPageRoutingModule,
 	],
-	declarations: [ViewInfoPage, SetTimeDifferencePipe],
+	declarations: [ViewInfoPage, SetTimeDifferencePipe, AssignPage],
 })
 export class ViewInfoPageModule {}

@@ -28,10 +28,9 @@ export class OrderPage implements OnInit {
 			.subscribe((r) => {
 				this.list = r;
 				this.filteredList = r;
-				
+
 			  });
 	}
-
 
 
 	buscar(event: any) {

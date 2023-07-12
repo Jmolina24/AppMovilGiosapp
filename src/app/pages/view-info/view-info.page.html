@@ -302,9 +302,19 @@
 				<div class="flex justify-between mt-2">
 					<div>
 						<ion-button type="ion-button"
-							class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2">
+							class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2"
+							(click)="getThirdsServices(item)">
 							Asignar
 						</ion-button>
+
+						<ion-modal #modal [isOpen]="isOpen">
+							<ng-template>
+								<app-assign class="ion-page" title="Asignar tercero" [items]="list"
+									[iddetalleorden]="item.iddetalleorden" [selectedItems]="selected"
+									(selectionChange)="selectionChanged($event)"
+									(selectionCancel)="modal.dismiss()"></app-assign>
+							</ng-template>
+						</ion-modal>
 					</div>
 					<div>
 						<ion-button *ngIf="!item.showInfo" (click)="item.showInfo = !item.showInfo" type="ion-button"
