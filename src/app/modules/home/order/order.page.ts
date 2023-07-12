@@ -10,6 +10,7 @@ import { Order } from 'src/app/interfaces/order';
 })
 export class OrderPage implements OnInit {
 	list: Order[] = [];
+	filteredList: Order[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 
 	constructor(
@@ -24,6 +25,18 @@ export class OrderPage implements OnInit {
 	get(): void {
 		this._api
 			.get({ idorden: 0 })
-			.subscribe((r) => (this.list = r));
+			.subscribe((r) => {
+				this.list = r;
+				this.filteredList = r;
+				
+			  });
 	}
+
+
+
+	buscar(event: any) {
+		const textoBusqueda = event.target.value;
+		this.list = this.filteredList.filter(item => item.tipoorden.includes(textoBusqueda));
+	  }
+
 }
