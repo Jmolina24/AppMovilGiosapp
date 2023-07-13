@@ -29,8 +29,8 @@ export class ManageOrdersPage implements OnInit {
 
 
 	buscar(event: any) {
-		const textoBusqueda = event.target.value;
-		this.list = this.filteredList.filter(item => item.tipoorden.includes(textoBusqueda));
+		const textoBusqueda = event.target.value.toLowerCase();
+		this.list = this.filteredList.filter(item => item.tipoorden.toLowerCase().includes(textoBusqueda));
 	  }
 
 

@@ -77,6 +77,15 @@ export class SignInPage implements OnInit {
 						this._router.navigate(['/manage-orders']);
 					}
 				}
+			}, (error) => {
+				if (error.codigo == 1) {
+					this.presentAlert(error.mensaje );
+					this.formData.enable();
+					return;
+				} else {
+					this.presentAlert(`error status ${error.status}: ${error.message}` );
+					this.formData.enable();
+				}
 			}
 		);
 	}

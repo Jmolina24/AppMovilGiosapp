@@ -15,11 +15,12 @@ export class ViewInfoDetailPage implements OnInit {
 	iddetalleorden: any = '';
 
 	public idrole: number = 1;
-
+	
 	item: any = {};
 
 	isOpen = false;
 	isOpenFile = false;
+	showImg = false;
 
 	listSupports: any[] = [];
 
@@ -32,7 +33,7 @@ export class ViewInfoDetailPage implements OnInit {
 		private _storage: StorageService,
 		private api: OrdersService,
 		private _rates: RatesService
-	) {}
+	) { }
 
 	ngOnInit() {
 		this.idorden = this.activatedRoute.snapshot.paramMap.get(
@@ -123,5 +124,9 @@ export class ViewInfoDetailPage implements OnInit {
 		return isIos ? 'Regresar' : '';
 	}
 
-	selectionChanged(item: any) {}
+	selectionChanged(item: any) { }
+
+
+
+
 }

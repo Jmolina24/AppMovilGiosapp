@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
+		
+		<ion-buttons slot="start">
+			<!-- <ion-back-button defaultHref="/" text="null"></ion-back-button> -->
+			<ion-back-button defaultHref="/" text=""></ion-back-button>
+		</ion-buttons>
 		<ion-title>Detalle de Orden</ion-title>
 	</ion-toolbar>
 </ion-header>
@@ -290,6 +295,7 @@
 			</div>
 		</div>
 	</div>
+
 	<ion-modal #modal [isOpen]="isOpenFile">
 		<ng-template>
 			<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
@@ -297,22 +303,19 @@
 				(selectionCancel)="modal.dismiss()"></app-file>
 		</ng-template>
 	</ion-modal>
+
+
+	<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+		<ion-fab-button size="small">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-list side="top">
+			<ion-fab-button (click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
+				<ion-icon name="color-palette"></ion-icon>
+			</ion-fab-button>
+
+		</ion-fab-list>
+	</ion-fab>
+
+
 </ion-content>
-
-<ion-footer>
-	<ion-toolbar>
-		<ion-buttons [collapse]="true" slot="start" class="pl-5">
-			<ion-button class="bg-red-400 rounded-md shadow-sm text-white" [routerLink]="['../../../']">
-				Regresar
-			</ion-button>
-		</ion-buttons>
-
-		<ion-buttons [collapse]="true" slot="end" class="pr-5">
-			<ion-button type="ion-button"
-				class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
-				(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
-				Visualizar Soporte
-			</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
-</ion-footer>
