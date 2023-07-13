@@ -1,4 +1,4 @@
-<ion-item *ngIf="detail" [routerLink]="'../view-info/' + detail.idorden" [detail]="false">
+<ion-item *ngIf="detail" [routerLink]="['../view-info-detail', detail.idorden, detail.iddetalleorden]" [detail]="false">
 	<div slot="start" class="dot dot-unread"></div>
 	<ion-label class="ion-text-wrap">
 		<h2>

@@ -6,8 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { AddOrderPageRoutingModule } from './add-order-routing.module';
 
-import { AddOrderPage } from './add-order.page';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +13,6 @@ import { AddOrderPage } from './add-order.page';
     IonicModule,
     AddOrderPageRoutingModule
   ],
-  declarations: [AddOrderPage]
+  declarations: []
 })
 export class AddOrderPageModule {}

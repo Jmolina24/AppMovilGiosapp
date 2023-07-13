@@ -6,11 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewInfoPageRoutingModule } from './view-info-routing.module';
 
-import { ViewInfoPage } from './view-info.page';
-import { SetTimeDifferencePipe } from 'src/app/core/pipes/set-time-difference.pipe';
-import { AssignPage } from '../assign/assign.page';
-import { FilePage } from '../file/file.page';
-
 @NgModule({
 	imports: [
 		CommonModule,
@@ -18,6 +13,6 @@ import { FilePage } from '../file/file.page';
 		IonicModule,
 		ViewInfoPageRoutingModule,
 	],
-	declarations: [ViewInfoPage, SetTimeDifferencePipe, AssignPage, FilePage],
+	declarations: [],
 })
 export class ViewInfoPageModule {}

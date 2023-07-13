@@ -7,6 +7,11 @@ import { OrdersService } from 'src/app/core/services/order.service';
 
 import * as _ from 'lodash';
 
+import { register } from 'swiper/element/bundle';
+import { IonicSlides } from '@ionic/angular';
+
+register();
+
 @Component({
 	selector: 'app-file',
 	templateUrl: './file.page.html',
@@ -22,6 +27,8 @@ export class FilePage implements OnInit {
 	@Output() selectionCancel = new EventEmitter<void>();
 	@Output() selectionChange = new EventEmitter<void>();
 
+	swiperModules = [IonicSlides];
+
 	filteredItems: any[] = [];
 	value: any = {};
 
@@ -32,6 +39,11 @@ export class FilePage implements OnInit {
 	isLoading = false;
 
 	formData: FormData = new FormData();
+
+	slideOpts = {
+		initialSlide: 1,
+		speed: 400,
+	};
 
 	constructor(
 		private _service: OrdersService,
@@ -150,7 +162,9 @@ export class FilePage implements OnInit {
 		this.isLoading = true;
 		this._alert.loading();
 
-		this.listFiles.forEach(({ file }) => this.formData.append('files', file));
+		this.listFiles.forEach(({ file }) =>
+			this.formData.append('files', file)
+		);
 
 		this._file.upload(this.formData).subscribe({
 			next: (response) => {
@@ -212,5 +226,9 @@ export class FilePage implements OnInit {
 				);
 			},
 		});
+	}
+
+	download(url: string): void {
+		this._file.download(url);
 	}
 }

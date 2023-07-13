@@ -111,44 +111,24 @@
 			<ion-searchbar (ionInput)="searchbarInput($event)"></ion-searchbar>
 		</ion-toolbar>
 	</ion-header>
-	<ng-container *ngFor="let file of items;">
-		<ng-container *ngIf="file.estado === 'CARGADO' && file.soporte">
-			<div class="w-40 h-40 mb-20">
-				<a class="flex flex-col m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
-					<div class="aspect-w-9 aspect-h-6">
-						<div class="flex items-center justify-center">
-							<!-- Icons -->
-							<div class="relative">
-								<ion-icon name="document-outline"></ion-icon>
-								<div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
-									[class.bg-red-600]="file?.tipo === 'PDF'" [class.bg-blue-600]="file?.tipo === 'DOC'"
-									[class.bg-green-600]="file?.tipo === 'XLS'"
-									[class.bg-gray-600]="file?.tipo === 'TXT'"
-									[class.bg-amber-600]="file?.tipo === 'JPG' || file?.tipo === 'PNG' || file?.tipo === 'JPEG'">
-									{{ file?.tipo }}
-								</div>
-							</div>
-						</div>
-					</div>
+	<ion-content>
+		<swiper-container>
+			<swiper-slide *ngFor="let file of items; let i = index;">
+				<ng-container *ngIf="file.estado === 'CARGADO' && file.soporte">
 					<div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
-						<div class="truncate">
-							{{file.tiposoporte}}
+						<span>{{file.tiposoporte}} - {{ file.index }}</span>
+						<img [src]="file.soporte" [alt]="file.tiposoporte">
+
+						<div class="w-full px-5">
+							<a (click)="download(file.soporte)"
+								class="flex justify-center w-full bg-red-500 p-4  rounded-full tracking-wide
+						font-semibold  focus:outline-none focus:shadow-outline hover:bg-red-600 shadow-lg cursor-pointer transition ease-in duration-300 mr-2">
+								Descargar <ion-icon name="download-outline" class="text-white"></ion-icon>
+							</a>
 						</div>
-						<ng-container *ngIf="file.iddetalleordensoporte">
-							<div class="text-secondary truncate">#
-								{{file.iddetalleordensoporte}}
-							</div>
-						</ng-container>
 					</div>
-				</a>
-				<div class="w-full px-5">
-					<a
-						class="flex justify-center w-full bg-red-500 p-4  rounded-full tracking-wide
-				font-semibold  focus:outline-none focus:shadow-outline hover:bg-red-600 shadow-lg cursor-pointer transition ease-in duration-300 mr-2">
-						<ion-icon name="download-outline" class="text-white"></ion-icon>
-					</a>
-				</div>
-			</div>
-		</ng-container>
-	</ng-container>
+				</ng-container>
+			</swiper-slide>
+		</swiper-container>
+	</ion-content>
 </ng-container>

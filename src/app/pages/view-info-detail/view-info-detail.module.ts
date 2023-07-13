@@ -6,15 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewInfoDetailPageRoutingModule } from './view-info-detail-routing.module';
 
-import { ViewInfoDetailPage } from './view-info-detail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewInfoDetailPageRoutingModule
+    ViewInfoDetailPageRoutingModule,
   ],
-  declarations: [ViewInfoDetailPage]
+  declarations: []
 })
 export class ViewInfoDetailPageModule {}

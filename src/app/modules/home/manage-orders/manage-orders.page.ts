@@ -24,7 +24,6 @@ export class ManageOrdersPage implements OnInit {
 		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => {
 			this.list = r;
 			this.filteredList = r;
-			
 		  });
 	}
 
