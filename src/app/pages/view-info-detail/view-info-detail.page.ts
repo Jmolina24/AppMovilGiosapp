@@ -11,6 +11,8 @@ import { StorageService } from 'src/app/core/services/storage.service';
 	styleUrls: ['./view-info-detail.page.scss'],
 })
 export class ViewInfoDetailPage implements OnInit {
+
+	public loaded = true;
 	idorden: any = '';
 	iddetalleorden: any = '';
 

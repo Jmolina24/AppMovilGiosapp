@@ -2,14 +2,56 @@
 	<ion-toolbar>
 
 		<ion-buttons slot="start">
-			<!-- <ion-back-button defaultHref="/" text="null"></ion-back-button> -->
 			<ion-back-button defaultHref="/" text=""></ion-back-button>
 		</ion-buttons>
 		<ion-title>Detalle de Orden</ion-title>
 	</ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content [fullscreen]="true">
+	<!-- <ion-list *ngIf="loaded">
+		<ion-item>
+			<ion-avatar slot="start">
+				<img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+			</ion-avatar>
+			<ion-label> <strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
+				<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
+				<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
+				<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
+				<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+	<ion-list *ngIf="!loaded">
+		<ion-list-header>
+			<ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+		</ion-list-header>
+		<ion-item>
+			<ion-thumbnail slot="start">
+				<ion-skeleton-text [animated]="true"></ion-skeleton-text>
+			</ion-thumbnail>
+			<ion-label>
+				<h3>
+					<ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+				</h3>
+				<p>
+					<ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+				</p>
+				<p>
+					<ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+				</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+	<ion-button (click)="loaded = !loaded">Toggle</ion-button> -->
+
+
+
 	<div class="shadow my-2 p-4 rounded-lg bg-white cursor-pointer"
 		[ngClass]="{'border-2 border-primary-500': item.showInfo}">
 		<div class="">
@@ -247,6 +289,7 @@
 				</ng-container>
 			</ng-container>
 		</ng-container>
+
 		<div class="flex justify-between mt-2">
 			<div>
 				<ng-container *ngIf="item.estado === 'POR ASIGNAR'">
@@ -256,13 +299,13 @@
 						Asignar
 					</ion-button>
 					<ion-modal #modal [isOpen]="isOpen">
-								<ng-template>
-									<app-assign class="ion-page" title="Asignar tercero" [items]="list"
-										[iddetalleorden]="item.iddetalleorden" [selectedItems]="selected"
-										(selectionChange)="selectionChanged($event)"
-										(selectionCancel)="modal.dismiss()"></app-assign>
-								</ng-template>
-							</ion-modal>
+						<ng-template>
+							<app-assign class="ion-page" title="Asignar tercero" [items]="list"
+								[iddetalleorden]="item.iddetalleorden" [selectedItems]="selected"
+								(selectionChange)="selectionChanged($event)"
+								(selectionCancel)="modal.dismiss()"></app-assign>
+						</ng-template>
+					</ion-modal>
 				</ng-container>
 
 
