@@ -2,7 +2,9 @@
 	<ion-header>
 		<ion-toolbar>
 			<ion-buttons slot="start">
-				<ion-button (click)="cancelChanges()">Regresar</ion-button>
+				<ion-button (click)="cancelChanges()">
+					<ion-back-button defaultHref="/" text=""></ion-back-button>
+				</ion-button>
 			</ion-buttons>
 			<ion-title>{{ title }}</ion-title>
 		</ion-toolbar>
@@ -103,7 +105,9 @@
 	<ion-header>
 		<ion-toolbar>
 			<ion-buttons slot="start">
-				<ion-button (click)="cancelChanges()">Regresar</ion-button>
+				<ion-button (click)="cancelChanges()">
+					<ion-back-button defaultHref="/" text=""></ion-back-button>
+				</ion-button>
 			</ion-buttons>
 			<ion-title>{{ title }}</ion-title>
 		</ion-toolbar>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Observable, forkJoin, of } from 'rxjs';
+import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { ServicesService } from 'src/app/core/services/services.service';
@@ -132,7 +132,8 @@ export class AddOrderPage implements OnInit {
 					}
 				);
 			},
-			({ error }) => {
+			(error) => {
+				console.log(error);
 				this.dismiss();
 				this.presentAlert(
 					'Error',
@@ -143,15 +144,23 @@ export class AddOrderPage implements OnInit {
 	}
 
 	create(): Observable<any> {
-		let { fechaentrega, ...data } = this.data;
-		fechaentrega = fechaentrega.split('T');
+		try {
+			let { fechaentrega, ...data } = this.data;
 
-		return this._orders.create({
-			idorden: '0',
-			...data,
-			fechaentrega: fechaentrega[0],
-			horaentrega: fechaentrega[1],
-		});
+			if (Object.values(data).every((e) => !e)) {
+				return throwError({ mensaje: 'Ingrese los datos completos.'});
+			}
+			fechaentrega = fechaentrega?.split('T');
+
+			return this._orders.create({
+				idorden: '0',
+				...data,
+				fechaentrega: fechaentrega[0],
+				horaentrega: fechaentrega[1],
+			});
+		} catch (error) {
+			return throwError({ mensaje: 'Ingrese los datos correctos.'});
+		}
 	}
 
 	createDetail(response: any, data: any): Observable<any> {
