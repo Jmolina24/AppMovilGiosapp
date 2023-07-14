@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
-		
+
 		<ion-buttons slot="start">
 			<!-- <ion-back-button defaultHref="/" text="null"></ion-back-button> -->
 			<ion-back-button defaultHref="/" text=""></ion-back-button>
@@ -255,14 +255,14 @@
 						(click)="getThirdsServices(item)">
 						Asignar
 					</ion-button>
-					<!-- <ion-modal #modal [isOpen]="isOpen">
+					<ion-modal #modal [isOpen]="isOpen">
 								<ng-template>
 									<app-assign class="ion-page" title="Asignar tercero" [items]="list"
 										[iddetalleorden]="item.iddetalleorden" [selectedItems]="selected"
 										(selectionChange)="selectionChanged($event)"
 										(selectionCancel)="modal.dismiss()"></app-assign>
 								</ng-template>
-							</ion-modal> -->
+							</ion-modal>
 				</ng-container>
 
 

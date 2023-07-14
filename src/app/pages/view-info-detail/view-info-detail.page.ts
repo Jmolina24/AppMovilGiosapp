@@ -15,7 +15,7 @@ export class ViewInfoDetailPage implements OnInit {
 	iddetalleorden: any = '';
 
 	public idrole: number = 1;
-	
+
 	item: any = {};
 
 	isOpen = false;
@@ -28,6 +28,8 @@ export class ViewInfoDetailPage implements OnInit {
 
 	private activatedRoute = inject(ActivatedRoute);
 	private platform = inject(Platform);
+
+	public selected: string[] = [];
 
 	constructor(
 		private _storage: StorageService,

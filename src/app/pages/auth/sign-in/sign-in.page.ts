@@ -34,9 +34,9 @@ export class SignInPage implements OnInit {
 		});
 	}
 
-	ngOnInit() { 
+	ngOnInit() {
 
-		
+
 	}
 
 	async presentAlert(message:any) {
@@ -46,7 +46,7 @@ export class SignInPage implements OnInit {
 		  message: message,
 		  buttons: ['OK'],
 		});
-	
+
 		await alert.present();
 	  }
 
@@ -60,33 +60,38 @@ export class SignInPage implements OnInit {
 		this.isLoading = true;
 		this.formData.disable();
 		this.auth.signIn(this.formData.value).subscribe(
-			
-			(response: any) => {
-				if (response.codigo == 1) {
-					this.presentAlert(response.mensaje );
-					return;
-				} else {
-					const { token, id, idrol, ...user } = response;
+			({
+				next: (response: any) => {
+					this.formData.enable();
+					if (response.codigo == 1) {
+						this.presentAlert(response.mensaje );
+						return;
+					} else {
+						const { token, id, idrol, ...user } = response;
 
-					this._storage.saveToken(token);
-					this._storage.saveUser(user);
-					this._storage.saveUserId(id);
-					this._storage.saveRolId(idrol);
+						this._storage.saveToken(token);
+						this._storage.saveUser(user);
+						this._storage.saveUserId(id);
+						this._storage.saveRolId(idrol);
 
-					if (this._storage.getUserId()) {
-						this._router.navigate(['/manage-orders']);
+						if (this._storage.getUserId()) {
+							this._router.navigate(['/manage-orders']);
+						}
 					}
-				}
-			}, (error) => {
-				if (error.codigo == 1) {
-					this.presentAlert(error.mensaje );
+				},
+				error: (error) => {
 					this.formData.enable();
-					return;
-				} else {
-					this.presentAlert(`error status ${error.status}: ${error.message}` );
+					if (error.codigo == 1) {
+						this.presentAlert(error.mensaje );
+						return;
+					} else {
+						this.presentAlert(`error status ${error.status}: ${error.error.mensaje || 'Error al procesar'}` );
+					}
+				},
+				complete:() => {
 					this.formData.enable();
 				}
-			}
+			})
 		);
 	}
 
