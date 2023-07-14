@@ -17,6 +17,7 @@ import { ViewInfoDetailPage } from './pages/view-info-detail/view-info-detail.pa
 import { AddOrderPage } from './pages/add-order/add-order.page';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { FormsModule } from '@angular/forms';
 		CommonModule,
 		FormsModule,
 		IonicModule,
+		PipesModule
 	],
 	providers: [
 		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

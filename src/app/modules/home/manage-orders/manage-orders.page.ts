@@ -13,6 +13,7 @@ export class ManageOrdersPage implements OnInit {
 	list: OrderDetail[] = [];
 	filteredList: OrderDetail[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
+	textoBusqueda = '';
 
 	constructor(private _api: OrdersService, private _storage: StorageService) {}
 
@@ -23,14 +24,13 @@ export class ManageOrdersPage implements OnInit {
 	get(): void {
 		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => {
 			this.list = r;
-			this.filteredList = r;
 		  });
 	}
 
 
 	buscar(event: any) {
-		const textoBusqueda = event.target.value.toLowerCase();
-		this.list = this.filteredList.filter(item => item.tipoorden.toLowerCase().includes(textoBusqueda));
+		this.textoBusqueda = event.target.value.toLowerCase();
+		// this.list = this.filteredList.filter(item => item.tipoorden.toLowerCase().includes(textoBusqueda.toLowerCase()));
 	  }
 
 

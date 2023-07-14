@@ -6,5 +6,5 @@
 
 <ion-content [fullscreen]="true">
 	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
-	<app-detail-order *ngFor="let item of list" [detail]="item"></app-detail-order>
+	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' " [detail]="item"></app-detail-order>
 </ion-content>

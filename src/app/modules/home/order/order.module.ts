@@ -8,9 +8,10 @@ import { OrderPageRoutingModule } from './order-routing.module';
 
 import { OrderPage } from './order.page';
 import { OrderComponent } from 'src/app/components/order/order.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
-	imports: [CommonModule, FormsModule, IonicModule, OrderPageRoutingModule],
+	imports: [CommonModule, FormsModule, IonicModule, OrderPageRoutingModule, PipesModule],
 	declarations: [OrderPage, OrderComponent],
 })
 export class OrderPageModule {}

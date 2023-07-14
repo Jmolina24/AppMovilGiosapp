@@ -12,7 +12,7 @@ export class OrderPage implements OnInit {
 	list: Order[] = [];
 	filteredList: Order[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
-
+	textoBusqueda = '';
 	constructor(
 		private _api: OrdersService,
 		private _storage: StorageService
@@ -34,8 +34,9 @@ export class OrderPage implements OnInit {
 
 
 	buscar(event: any) {
-		const textoBusqueda = event.target.value.toLowerCase();
-		this.list = this.filteredList.filter(item => item.tipoorden.toLowerCase().includes(textoBusqueda));
+		// const textoBusqueda = event.target.value.toLowerCase();
+		this.textoBusqueda = event.target.value.toLowerCase();
+		
 	  }
 
 }
