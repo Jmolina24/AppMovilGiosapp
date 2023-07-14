@@ -8,22 +8,109 @@
 	</ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content [fullscreen]="true">
-	<!-- <ion-list *ngIf="loaded">
+	<ion-list *ngIf="loaded">
 		<ion-item>
-			<ion-avatar slot="start">
-				<img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-			</ion-avatar>
-			<ion-label> <strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
+			<ion-label>
+				<div class="border-b-2 border-gray-300 my-4">
+				<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
 				<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
 				<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
 				<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
 				<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
+			</div>
+				<ng-container >
+					<div class="border-b-2 border-gray-300 my-4">
+						<p> <strong> Cliente: </strong> {{ item.cliente }}</p>
+						<p> <strong> Sede: </strong> {{ item.clientesede }}</p>
+						<p> <strong> Fecha de Entrega: </strong> {{ item.fechaentrega }}</p>
+						<p> <strong> Hora de Entrega: </strong> {{ item.horaentrega }}</p>
+						<!-- <p> <strong> Fecha de Registro: </strong> {{ item.fecha }}</p>
+					<p> <strong> Hora de Registro: </strong> {{ item.fecha }}</p> {{ item.fecha | date: 'short' | setTimeDifference }} -->
+						<p> <strong> Un. Medida: </strong> {{ item.unidadmedida }}</p>
+						<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
+						<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
+					</div>
+					<ng-container *ngIf="true">
+						<!-- <ng-container *ngIf="viewInfoOrden"> -->
+						<div class="border-b-2 border-gray-300 my-4">
+							<p> <strong> Tipo de Servicio: </strong> {{ item.tipoorden }}</p>
+							<p> <strong> Tercero: </strong> {{ item.tercero || 'Sin tercero' }}</p>
+							<p> <strong> Referencia: </strong> {{ item.referencia }}</p>
+							<p> <strong> Observación: </strong> {{ item.observacion }}</p>
+						</div>
+						<ng-container *ngIf="![2, 3, 4].includes(idrole)">
+							<ng-container *ngIf="![2].includes(idrole)">
+								<div class="border-b-2 border-gray-300 my-4">
+									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{
+										item.precio_compra | currency:"COP ":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Precio de Compra: </strong> Sin precio de
+										compra</p>
+								</div>
+							</ng-container>
+
+							<ng-container *ngIf="![3, 4].includes(idrole)">
+								<div class="border-b-2 border-gray-300 my-4">
+									<p *ngIf="item.precio_venta"> <strong> Precio de Venta: </strong> {{
+										item.precio_venta | currency:"COP ":"symbol"}}</p>
+									<p *ngIf="!item.precio_venta"> <strong> Precio de Venta: </strong> Sin precio de
+										venta</p>
+								</div>
+							</ng-container>
+
+
+							<ng-container *ngIf="![2].includes(idrole)">
+								<div class="border-b-2 border-gray-300 my-4">
+									<p *ngIf="item.precio_compra"> <strong> Total de Precio de Compra: </strong> {{
+										(item.precio_compra * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Total de Precio de Compra: </strong> Sin
+										precio de compra</p>
+								</div>
+							</ng-container>
+
+							<ng-container *ngIf="![3, 4].includes(idrole)">
+								<div class="border-b-2 border-gray-300 my-4">
+									<p *ngIf="item.precio_venta"> <strong> Total Precio de Venta: </strong>{{
+										(item.precio_venta * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_venta"> <strong> Total Precio de Venta: </strong>Sin precio
+										de venta</p>
+								</div>
+							</ng-container>
+						</ng-container>
+					</ng-container>
+
+					<ng-container *ngIf="false">
+						<!-- <ng-container *ngIf="viewInfoOrden"> -->
+						<ng-container *ngIf="true">
+							<div class="grid grid-cols-2 grid-rows-2 gap-4 my-4 pb-2 border-b-2 border-gray-300">
+								<ng-container *ngIf="true">
+									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{ item.precio_compra | currency:"COP ":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Precio de Compra: </strong> Sin precio de compra</p>
+								</ng-container>
+
+								<ng-container *ngIf="true">
+										<p *ngIf="item.precio_venta"> <strong> Precio de Venta: </strong> {{ item.precio_venta | currency:"COP ":"symbol"}}</p>
+										<p *ngIf="!item.precio_venta"> <strong> Precio de Venta: </strong> Sin precio de venta</p>									
+								</ng-container>
+
+								<ng-container *ngIf="true">									
+									<p *ngIf="item.precio_compra"> <strong> Total de Precio de Compra: </strong> {{(item.precio_compra * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Total de Precio de Compra: </strong> Sin precio de compra</p>
+								</ng-container>
+
+								<ng-container *ngIf="true">
+									<p *ngIf="item.precio_venta"> <strong> Total Precio de Venta: </strong>{{ (item.precio_venta * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_venta"> <strong> Total Precio de Venta: </strong>Sin precio de venta</p>
+								</ng-container>
+							</div>
+						</ng-container>
+					</ng-container>
+				</ng-container>
+
+
 			</ion-label>
 		</ion-item>
+
 	</ion-list>
 
 	<ion-list *ngIf="!loaded">
@@ -48,247 +135,11 @@
 		</ion-item>
 	</ion-list>
 
-	<ion-button (click)="loaded = !loaded">Toggle</ion-button> -->
-
-
-
+	<!-- 
 	<div class="shadow my-2 p-4 rounded-lg bg-white cursor-pointer"
 		[ngClass]="{'border-2 border-primary-500': item.showInfo}">
-		<div class="">
-			<div class="flex justify-between">
-				<h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1 h-12" title="">
-					Servicio #{{ item.iddetalleorden }} {{ item.servicio }}({{ item.tipoorden }}) -
-					Cantidad {{ item.cantidad }}
-				</h2>
-				<span class="bg-blue-100 text-blue-800 text-xs font-medium my-2 px-2.5 py-0.5 rounded-full">{{
-					item.estado }}</span>
-			</div>
-			<p class="text-sm text-gray-800 line-clamp-1 mt-2"
-				title="{{ item.ciudadservicio }}({{ item.deptoservicio}})">
-				{{ item.ciudadservicio }}({{ item.deptoservicio}})
-			</p>
-			<p class="text-sm text-gray-800 line-clamp-1 mt-2" title="{{ item.fechaentrega}} - {{ item.horaentrega }}">
-				{{ item.fechaentrega}} - {{ item.horaentrega }}
-			</p>
-		</div>
-
-		<ng-container *ngIf="item.showInfo">
-			<div class="border-b-2 border-gray-300 my-4">
-				<span class="text-center items-center flex">
-					Cliente - (Sede cliente):
-				</span>
-				<span class="mt-2 xl:mt-0">
-					{{ item.cliente }}({{ item.clientesede}})
-				</span>
-			</div>
-
-			<div class="border-b-2 border-gray-300 my-4">
-				<span class="text-center items-center flex">
-					Fecha - Hora de Entrega:
-				</span>
-				<span class="mt-2 xl:mt-0">
-					{{ item.fechaentrega }} - {{ item.horaentrega }}
-				</span>
-			</div>
-
-			<div class="border-b-2 border-gray-300 my-4">
-				<span class="text-center items-center flex">
-					Fecha Hora de Registro:
-				</span>
-				<span class="mt-2 xl:mt-0">
-					<!-- {{ item.fecha | date: 'short' | setTimeDifference }} -->
-				</span>
-			</div>
-
-			<div class="border-b-2 border-gray-300 my-4">
-				<span class="text-center items-center flex">
-					Un. Medida - Servicio:
-				</span>
-				<span class="mt-2 xl:mt-0">
-					{{ item.unidadmedida }} - {{ item.servicio }}
-				</span>
-			</div>
-
-			<div class="border-b-2 border-gray-300 my-4">
-				<span class="text-center items-center flex">
-					Cantidad:
-				</span>
-				<span class="mt-2 xl:mt-0">
-					{{ item.cantidad }}
-				</span>
-			</div>
-
-			<ng-container *ngIf="true">
-				<!-- <ng-container *ngIf="viewInfoOrden"> -->
-				<div class="border-b-2 border-gray-300 my-4">
-					<span class="text-center items-center flex">
-						Tipo de Servicio:
-					</span>
-					<span class="mt-2 xl:mt-0">
-						{{ item.tipoorden }}
-					</span>
-				</div>
-
-				<div class="border-b-2 border-gray-300 my-4">
-					<span class="text-center items-center flex">
-						Tercero:
-					</span>
-					<span class="mt-2 xl:mt-0">
-						{{ item.tercero || 'Sin tercero' }}
-					</span>
-				</div>
-
-				<div class="border-b-2 border-gray-300 my-4">
-					<span class="text-center items-center flex">
-						Referencia:
-					</span>
-					<span class="mt-2 xl:mt-0">
-						{{ item.referencia }}
-					</span>
-				</div>
 
 
-				<div class="border-b-2 border-gray-300 my-4">
-					<span class="text-center items-center flex">
-						Observación:
-					</span>
-					<span class="mt-2 xl:mt-0">
-						{{ item.observacion }}
-					</span>
-				</div>
-
-				<ng-container *ngIf="![2, 3, 4].includes(idrole)">
-					<ng-container *ngIf="![2].includes(idrole)">
-						<div class="border-b-2 border-gray-300 my-4">
-							<span class="text-center items-center flex">
-								Precio de Compra:
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="item.precio_compra">
-								{{ item.precio_compra | currency:"COP ":"symbol" }}
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="!item.precio_compra">
-								Sin precio de compra
-							</span>
-						</div>
-					</ng-container>
-
-					<ng-container *ngIf="![3, 4].includes(idrole)">
-						<div class="border-b-2 border-gray-300 my-4">
-							<span class="text-center items-center flex">
-								Precio de Venta:
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="item.precio_venta">
-								{{ item.precio_venta | currency:"COP ":"symbol" }}
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="!item.precio_venta">
-								Sin precio de venta
-							</span>
-						</div>
-					</ng-container>
-
-
-					<ng-container *ngIf="![2].includes(idrole)">
-						<div class="border-b-2 border-gray-300 my-4">
-							<span class="text-center items-center flex">
-								Total de Precio de Compra:
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="item.precio_compra">
-								{{ (item.precio_compra * item.cantidad) |
-								currency:"COP":"symbol" }}
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="!item.precio_compra">
-								Sin precio de compra
-							</span>
-						</div>
-					</ng-container>
-
-					<ng-container *ngIf="![3, 4].includes(idrole)">
-						<div class="border-b-2 border-gray-300 my-4">
-							<span class="text-center items-center flex">
-								Total Precio de Venta:
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="item.precio_venta">
-								{{ (item.precio_venta * item.cantidad) | currency:"COP":"symbol"
-								}}
-							</span>
-							<span class="mt-2 xl:mt-0" *ngIf="!item.precio_venta">
-								Sin precio de venta
-							</span>
-						</div>
-					</ng-container>
-				</ng-container>
-			</ng-container>
-
-			<ng-container *ngIf="false">
-				<!-- <ng-container *ngIf="viewInfoOrden"> -->
-				<ng-container *ngIf="true">
-					<!-- <ng-container *ngIf="![2, 3, 4].includes(idrole)"></ng-container> -->
-					<div class="grid grid-cols-2 grid-rows-2 gap-4 my-4 pb-2 border-b-2 border-gray-300">
-						<ng-container *ngIf="true">
-							<!-- <ng-container *ngIf="![2].includes(idrole)"> -->
-							<p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-								<span class="text-center items-center flex">
-									Precio de Compra:
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="item.precio_compra">
-									{{ item.precio_compra | currency:"COP ":"symbol" }}
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="!item.precio_compra">
-									Sin precio de compra
-								</span>
-							</p>
-						</ng-container>
-
-						<ng-container *ngIf="true">
-							<!-- <ng-container *ngIf="![3, 4].includes(idrole)"></ng-container> -->
-							<p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-								<span class="text-center items-center flex">
-									Precio de Venta:
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="item.precio_venta">
-									{{ item.precio_venta | currency:"COP ":"symbol" }}
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="!item.precio_venta">
-									Sin precio de venta
-								</span>
-							</p>
-						</ng-container>
-
-						<ng-container *ngIf="true">
-							<!-- <ng-container *ngIf="![2].includes(idrole)"> -->
-							<p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-								<span class="text-center items-center flex">
-									Total de Precio de Compra:
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="item.precio_compra">
-									{{ (item.precio_compra * item.cantidad) |
-									currency:"COP":"symbol" }}
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="!item.precio_compra">
-									Sin precio de compra
-								</span>
-							</p>
-						</ng-container>
-
-						<ng-container *ngIf="true">
-							<!-- <ng-container *ngIf="![3, 4].includes(idrole)"> -->
-							<p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-								<span class="text-center items-center flex">
-									Total Precio de Venta:
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="item.precio_venta">
-									{{ (item.precio_venta * item.cantidad) | currency:"COP":"symbol"
-									}}
-								</span>
-								<span class="mt-2 xl:mt-0" *ngIf="!item.precio_venta">
-									Sin precio de venta
-								</span>
-							</p>
-						</ng-container>
-					</div>
-				</ng-container>
-			</ng-container>
-		</ng-container>
 
 		<div class="flex justify-between mt-2">
 			<div>
@@ -309,13 +160,15 @@
 				</ng-container>
 
 
-				<ng-container *ngIf="false">
-					<!-- <ng-container *ngIf="item.estado === 'ASIGNADA'"></ng-container> -->
-					<ion-button type="ion-button" *ngIf="false"
+				<ng-container *ngIf="false"> 
+					-->
+	<!-- OJO ya estaba comentariado <ng-container *ngIf="item.estado === 'ASIGNADA'"></ng-container> -->
+
+	<!-- <ion-button type="ion-button" *ngIf="false"
 						class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2">
 						Cargar
-					</ion-button>
-					<!-- <ion-modal #modal [isOpen]="isOpenFile">
+					</ion-button> -->
+	<!-- <ion-modal #modal [isOpen]="isOpenFile">
 								<ng-template>
 									<app-file class="ion-page" title="Cargar" [items]="listSupport"
 										action="upload"
@@ -324,7 +177,7 @@
 										(selectionCancel)="modal.dismiss()"></app-file>
 								</ng-template>
 							</ion-modal> -->
-				</ng-container>
+	<!-- </ng-container>
 			</div>
 			<div>
 				<ion-button *ngIf="!item.showInfo" (click)="item.showInfo = !item.showInfo" type="ion-button"
@@ -337,7 +190,7 @@
 				</ion-button>
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 	<ion-modal #modal [isOpen]="isOpenFile">
 		<ng-template>

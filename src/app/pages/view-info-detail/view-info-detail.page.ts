@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { timeInterval, timeout } from 'rxjs';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { RatesService } from 'src/app/core/services/rates.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -12,7 +13,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
 })
 export class ViewInfoDetailPage implements OnInit {
 
-	public loaded = true;
+	public loaded = false;
 	idorden: any = '';
 	iddetalleorden: any = '';
 
@@ -40,6 +41,14 @@ export class ViewInfoDetailPage implements OnInit {
 	) { }
 
 	ngOnInit() {
+
+		setTimeout(() => {
+			this.loaded = true;
+		  }, 3000);
+
+		
+
+
 		this.idorden = this.activatedRoute.snapshot.paramMap.get(
 			'id'
 		) as string;
