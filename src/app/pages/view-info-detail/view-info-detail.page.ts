@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { timeInterval, timeout } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { RatesService } from 'src/app/core/services/rates.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -37,7 +38,8 @@ export class ViewInfoDetailPage implements OnInit {
 	constructor(
 		private _storage: StorageService,
 		private api: OrdersService,
-		private _rates: RatesService
+		private _rates: RatesService,
+		private _alert: AlertService
 	) { }
 
 	ngOnInit() {
@@ -46,7 +48,7 @@ export class ViewInfoDetailPage implements OnInit {
 			this.loaded = true;
 		  }, 1000);
 
-		
+
 
 
 		this.idorden = this.activatedRoute.snapshot.paramMap.get(
@@ -140,6 +142,28 @@ export class ViewInfoDetailPage implements OnInit {
 	selectionChanged(item: any) { }
 
 
+	changeStatusOrderDetail({ iddetalleorden }: any, status: 'F' | 'P' = 'P'): void {
+		this._alert.loading();
 
+		this.api
+			.changeStatusOrderDatails(iddetalleorden, status)
+			.subscribe(
+				(response) => {
+					this._alert.closeAlert();
+					if (response.codigo !== 0) {
+						this._alert.error(response.titulo, response.mensaje);
+						return;
+					}
+
+					this._alert.success(response.titulo, response.mensaje);
+
+					this.get();
+				},
+				({ error }) => {
+					this._alert.closeAlert();
+					this._alert.error(error.titulo || 'Error', error.mensaje || 'Error al procesar la solicitud.');
+				}
+			);
+	}
 
 }

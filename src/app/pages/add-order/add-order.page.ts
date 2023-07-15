@@ -159,6 +159,7 @@ export class AddOrderPage implements OnInit {
 				horaentrega: fechaentrega[1],
 			});
 		} catch (error) {
+			console.log(error);
 			return throwError({ mensaje: 'Ingrese los datos correctos.'});
 		}
 	}

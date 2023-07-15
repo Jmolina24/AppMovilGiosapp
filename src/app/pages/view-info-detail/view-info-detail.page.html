@@ -116,20 +116,39 @@
 
 				<ion-grid [fixed]="true">
 					<ion-row>
-					  <ion-col><ion-button size="small">Cargar Soportes</ion-button></ion-col>
-					  <ion-col><ion-button size="small" color="tertiary" (click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
-						Vizualizar Soportes</ion-button></ion-col>
+						<ng-container *ngIf="item.estado === 'ASIGNADA'">
+							<ion-col>
+								<ion-button size="small"
+									(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
+									Cargar
+								</ion-button>
+								<ion-modal #modal [isOpen]="isOpenFile">
+									<ng-template>
+										<app-file class="ion-page" title="Cargar" [items]="listSupports" action="upload"
+											[iddetalleorden]="item.iddetalleorden"
+											(selectionChange)="selectionChanged($event)"
+											(selectionCancel)="modal.dismiss()"></app-file>
+									</ng-template>
+								</ion-modal>
+							</ion-col>
+						</ng-container>
+						<ion-col><ion-button size="small" color="tertiary"
+								(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
+								Vizualizar Soportes</ion-button></ion-col>
 					</ion-row>
-				  </ion-grid>
-				  <ion-grid [fixed]="true">
-					<ion-row>
-					  <ion-col>
-						<ion-button color="success" expand="full">
-							<ion-icon size="small"  slot="end" name="send-outline"></ion-icon>
-							Finalizar
-						  </ion-button></ion-col>
-					</ion-row>
-				  </ion-grid>
+				</ion-grid>
+				<ion-grid [fixed]="true">
+					<ng-container *ngIf="item.estado === 'ASIGNADA'">
+						<ion-row>
+							<ion-col>
+								<ion-button color="success" expand="full" (click)="changeStatusOrderDetail(item, 'P')">
+									<ion-icon size="small" slot="end" name="send-outline"></ion-icon>
+									Finalizar
+								</ion-button>
+							</ion-col>
+						</ion-row>
+					</ng-container>
+				</ion-grid>
 			</ion-label>
 
 		</ion-item>
@@ -160,7 +179,7 @@
 
 
 
-	<!-- 
+	<!--
 	<div class="shadow my-2 p-4 rounded-lg bg-white cursor-pointer"
 		[ngClass]="{'border-2 border-primary-500': item.showInfo}">
 
@@ -185,7 +204,7 @@
 				</ng-container>
 
 
-				<ng-container *ngIf="false"> 
+				<ng-container *ngIf="false">
 					-->
 	<!-- OJO ya estaba comentariado <ng-container *ngIf="item.estado === 'ASIGNADA'"></ng-container> -->
 
