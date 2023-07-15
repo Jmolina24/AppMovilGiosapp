@@ -44,7 +44,7 @@ export class ViewInfoDetailPage implements OnInit {
 
 		setTimeout(() => {
 			this.loaded = true;
-		  }, 3000);
+		  }, 1000);
 
 		
 

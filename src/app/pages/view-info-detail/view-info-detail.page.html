@@ -1,6 +1,5 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
-
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/" text=""></ion-back-button>
 		</ion-buttons>
@@ -13,13 +12,13 @@
 		<ion-item>
 			<ion-label>
 				<div class="border-b-2 border-gray-300 my-4">
-				<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
-				<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
-				<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
-				<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
-				<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
-			</div>
-				<ng-container >
+					<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
+					<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
+					<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
+					<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
+					<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
+				</div>
+				<ng-container>
 					<div class="border-b-2 border-gray-300 my-4">
 						<p> <strong> Cliente: </strong> {{ item.cliente }}</p>
 						<p> <strong> Sede: </strong> {{ item.clientesede }}</p>
@@ -84,31 +83,55 @@
 						<ng-container *ngIf="true">
 							<div class="grid grid-cols-2 grid-rows-2 gap-4 my-4 pb-2 border-b-2 border-gray-300">
 								<ng-container *ngIf="true">
-									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{ item.precio_compra | currency:"COP ":"symbol"}}</p>
-									<p *ngIf="!item.precio_compra"> <strong> Precio de Compra: </strong> Sin precio de compra</p>
+									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{
+										item.precio_compra | currency:"COP ":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Precio de Compra: </strong> Sin precio de
+										compra</p>
 								</ng-container>
 
 								<ng-container *ngIf="true">
-										<p *ngIf="item.precio_venta"> <strong> Precio de Venta: </strong> {{ item.precio_venta | currency:"COP ":"symbol"}}</p>
-										<p *ngIf="!item.precio_venta"> <strong> Precio de Venta: </strong> Sin precio de venta</p>									
-								</ng-container>
-
-								<ng-container *ngIf="true">									
-									<p *ngIf="item.precio_compra"> <strong> Total de Precio de Compra: </strong> {{(item.precio_compra * item.cantidad) | currency:"COP":"symbol"}}</p>
-									<p *ngIf="!item.precio_compra"> <strong> Total de Precio de Compra: </strong> Sin precio de compra</p>
+									<p *ngIf="item.precio_venta"> <strong> Precio de Venta: </strong> {{
+										item.precio_venta | currency:"COP ":"symbol"}}</p>
+									<p *ngIf="!item.precio_venta"> <strong> Precio de Venta: </strong> Sin precio de
+										venta</p>
 								</ng-container>
 
 								<ng-container *ngIf="true">
-									<p *ngIf="item.precio_venta"> <strong> Total Precio de Venta: </strong>{{ (item.precio_venta * item.cantidad) | currency:"COP":"symbol"}}</p>
-									<p *ngIf="!item.precio_venta"> <strong> Total Precio de Venta: </strong>Sin precio de venta</p>
+									<p *ngIf="item.precio_compra"> <strong> Total de Precio de Compra: </strong>
+										{{(item.precio_compra * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_compra"> <strong> Total de Precio de Compra: </strong> Sin
+										precio de compra</p>
+								</ng-container>
+
+								<ng-container *ngIf="true">
+									<p *ngIf="item.precio_venta"> <strong> Total Precio de Venta: </strong>{{
+										(item.precio_venta * item.cantidad) | currency:"COP":"symbol"}}</p>
+									<p *ngIf="!item.precio_venta"> <strong> Total Precio de Venta: </strong>Sin precio
+										de venta</p>
 								</ng-container>
 							</div>
 						</ng-container>
 					</ng-container>
 				</ng-container>
 
-
+				<ion-grid [fixed]="true">
+					<ion-row>
+					  <ion-col><ion-button size="small">Cargar Soportes</ion-button></ion-col>
+					  <ion-col><ion-button size="small" color="tertiary" (click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
+						Vizualizar Soportes</ion-button></ion-col>
+					</ion-row>
+				  </ion-grid>
+				  <ion-grid [fixed]="true">
+					<ion-row>
+					  <ion-col>
+						<ion-button color="success" expand="full">
+							<ion-icon size="small"  slot="end" name="send-outline"></ion-icon>
+							Finalizar
+						  </ion-button></ion-col>
+					</ion-row>
+				  </ion-grid>
 			</ion-label>
+
 		</ion-item>
 
 	</ion-list>
@@ -134,6 +157,8 @@
 			</ion-label>
 		</ion-item>
 	</ion-list>
+
+
 
 	<!-- 
 	<div class="shadow my-2 p-4 rounded-lg bg-white cursor-pointer"
@@ -199,19 +224,5 @@
 				(selectionCancel)="modal.dismiss()"></app-file>
 		</ng-template>
 	</ion-modal>
-
-
-	<ion-fab slot="fixed" vertical="bottom" horizontal="end">
-		<ion-fab-button size="small">
-			<ion-icon name="add"></ion-icon>
-		</ion-fab-button>
-		<ion-fab-list side="top">
-			<ion-fab-button (click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
-				<ion-icon name="color-palette"></ion-icon>
-			</ion-fab-button>
-
-		</ion-fab-list>
-	</ion-fab>
-
 
 </ion-content>
