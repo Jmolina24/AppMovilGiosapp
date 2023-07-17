@@ -317,8 +317,7 @@
 							</ion-modal>
 						</ng-container>
 
-						<ng-container *ngIf="false">
-							<!-- <ng-container *ngIf="item.estado === 'ASIGNADA'"></ng-container> -->
+						<ng-container *ngIf="item.estado === 'ASIGNADA'">
 							<ion-button type="ion-button" *ngIf="false"
 								class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2"
 								(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
@@ -326,8 +325,7 @@
 							</ion-button>
 							<ion-modal #modal [isOpen]="isOpenFile">
 								<ng-template>
-									<app-file class="ion-page" title="Cargar" [items]="listSupport"
-										action="upload"
+									<app-file class="ion-page" title="Cargar" [items]="listSupport" action="upload"
 										[iddetalleorden]="item.iddetalleorden"
 										(selectionChange)="selectionChanged($event)"
 										(selectionCancel)="modal.dismiss()"></app-file>
@@ -344,8 +342,7 @@
 
 							<ion-modal #modal [isOpen]="isOpenFile">
 								<ng-template>
-									<app-file class="ion-page" title="Visualizar" [items]="listSupport"
-										action="view"
+									<app-file class="ion-page" title="Visualizar" [items]="listSupport" action="view"
 										[iddetalleorden]="item.iddetalleorden"
 										(selectionChange)="selectionChanged($event)"
 										(selectionCancel)="modal.dismiss()"></app-file>

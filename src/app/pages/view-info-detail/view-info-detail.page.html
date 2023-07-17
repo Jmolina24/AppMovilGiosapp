@@ -132,9 +132,20 @@
 								</ion-modal>
 							</ion-col>
 						</ng-container>
-						<ion-col><ion-button size="small" color="tertiary"
-								(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
-								Vizualizar Soportes</ion-button></ion-col>
+						<ng-container *ngIf="!['ASIGNADA', 'POR ASIGNAR'].includes(item.estado)">
+							<ion-col>
+								<ion-button size="small" color="tertiary"
+									(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
+									Vizualizar Soportes</ion-button>
+									<ion-modal #modal [isOpen]="isOpenFile">
+										<ng-template>
+											<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
+												[iddetalleorden]="item.iddetalleorden" (selectionChange)="selectionChanged($event)"
+												(selectionCancel)="modal.dismiss()"></app-file>
+										</ng-template>
+									</ion-modal>
+							</ion-col>
+						</ng-container>
 					</ion-row>
 				</ion-grid>
 				<ion-grid [fixed]="true">
@@ -235,13 +246,4 @@
 			</div>
 		</div>
 	</div>-->
-
-	<ion-modal #modal [isOpen]="isOpenFile">
-		<ng-template>
-			<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
-				[iddetalleorden]="item.iddetalleorden" (selectionChange)="selectionChanged($event)"
-				(selectionCancel)="modal.dismiss()"></app-file>
-		</ng-template>
-	</ion-modal>
-
 </ion-content>

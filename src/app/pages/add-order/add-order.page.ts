@@ -19,7 +19,9 @@ export class AddOrderPage implements OnInit {
 
 	listDetails: any[] = [];
 
-	data: any = {};
+	data: any = {
+		fechaentrega: this.getDate(new Date().toString()),
+	};
 	dataDetail: any = {};
 
 	addService: boolean = false;
@@ -148,19 +150,44 @@ export class AddOrderPage implements OnInit {
 			let { fechaentrega, ...data } = this.data;
 
 			if (Object.values(data).every((e) => !e)) {
-				return throwError({ mensaje: 'Ingrese los datos completos.'});
+				return throwError({ mensaje: 'Ingrese los datos completos.' });
 			}
-			fechaentrega = fechaentrega?.split('T');
 
-			return this._orders.create({
+			if (Object.values(data).length < 3) {
+				return throwError({ mensaje: 'Ingrese los datos requeridos.' });
+			}
+
+			if (!data.idtipoorden) {
+				return throwError({ mensaje: 'Ingrese los datos requeridos: El tipo de orden' });
+			}
+
+			if (!data.idclientesede) {
+				return throwError({ mensaje: 'Ingrese los datos requeridos: Sede' });
+			}
+
+			let content = {
 				idorden: '0',
 				...data,
-				fechaentrega: fechaentrega[0],
-				horaentrega: fechaentrega[1],
+			};
+
+			if (fechaentrega) {
+				fechaentrega = fechaentrega?.split('T');
+
+				content = {
+					...content,
+					fechaentrega: fechaentrega[0],
+					horaentrega: fechaentrega[1],
+				};
+			}
+
+			return this._orders.create({
+				fechaentrega: '',
+				horaentrega: '',
+				observacion: '',
+				...content,
 			});
 		} catch (error) {
-			console.log(error);
-			return throwError({ mensaje: 'Ingrese los datos correctos.'});
+			return throwError({ mensaje: 'Ingrese los datos correctos.' });
 		}
 	}
 
@@ -194,9 +221,9 @@ export class AddOrderPage implements OnInit {
 			idtipoorden: '',
 			idcliente: '',
 			idclientesede: '',
-			fechaentrega: '',
+			fechaentrega: this.getDate(new Date().toString()),
 			observacion: '',
-		}
+		};
 	}
 
 	async present() {
@@ -223,5 +250,18 @@ export class AddOrderPage implements OnInit {
 		});
 
 		await alert.present();
+	}
+
+	getDate(date: string): string {
+		const fecha = new Date(date);
+
+		const year = fecha.getFullYear();
+		const month = String(fecha.getMonth() + 1).padStart(2, '0');
+		const day = String(fecha.getDate()).padStart(2, '0');
+		const hours = String(fecha.getHours()).padStart(2, '0');
+		const minutes = String(fecha.getMinutes()).padStart(2, '0');
+		const seconds = String(fecha.getSeconds()).padStart(2, '0');
+
+		return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 	}
 }

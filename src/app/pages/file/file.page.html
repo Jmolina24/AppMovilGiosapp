@@ -78,7 +78,7 @@
 	<ion-footer>
 		<ion-toolbar>
 			<ion-buttons [collapse]="true" slot="start" class="pl-5">
-				<ion-button class="bg-red-400 rounded-md shadow-sm text-white" [routerLink]="['/order']">
+				<ion-button class="bg-red-400 rounded-md shadow-sm text-white" (click)="cancelChanges()">
 					Cancelar
 				</ion-button>
 			</ion-buttons>
@@ -102,7 +102,20 @@
 </ng-container>
 
 <ng-container *ngIf="action === 'view'">
-	<ion-header>
+	<ion-header [translucent]="true">
+		<ion-toolbar>
+			<ion-buttons slot="start">
+				<ion-button (click)="cancelChanges()">
+					<ion-icon name="arrow-back-outline"></ion-icon>
+				</ion-button>
+			</ion-buttons>
+			<ion-title>{{ title }}</ion-title>
+		</ion-toolbar>
+		<ion-toolbar *ngIf="items.length > 0">
+			<ion-searchbar (ionInput)="searchbarInput($event)"></ion-searchbar>
+		</ion-toolbar>
+	</ion-header>
+	<!-- <ion-header>
 		<ion-toolbar>
 			<ion-buttons slot="start">
 				<ion-button (click)="cancelChanges()">
@@ -114,7 +127,7 @@
 		<ion-toolbar *ngIf="items.length > 0">
 			<ion-searchbar (ionInput)="searchbarInput($event)"></ion-searchbar>
 		</ion-toolbar>
-	</ion-header>
+	</ion-header> -->
 	<ion-content>
 		<swiper-container>
 			<swiper-slide *ngFor="let file of items; let i = index;">
