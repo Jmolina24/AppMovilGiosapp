@@ -2,9 +2,11 @@
 	<ion-toolbar>
 		<ion-title>Servicios Asignados</ion-title>
 	</ion-toolbar>
+	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
+
+
+<ion-content [fullscreen]="true">	
 	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' " [detail]="item"></app-detail-order>
 </ion-content>

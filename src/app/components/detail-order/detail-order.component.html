@@ -8,9 +8,9 @@
 				<ion-icon aria-hidden="true" name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
 			</span>
 		</h2>
-		<h3>{{ detail.clientesede }} ({{ detail.cliente }})</h3>
-		<p>
-			Fecha - Hora de entraga: {{ (detail.fechaentrega) || '-' }} - {{ detail.horaentrega || '-' }}
-		</p>
+		<p> <strong> Cliente:</strong> {{ detail.cliente }}</p>
+		<p> <strong> Sede:</strong> {{ detail.clientesede }}</p>
+		<p> <strong> Fecha de entraga:</strong> {{ (detail.fechaentrega) || '-' }} </p>
+		<p> <strong> Hora de entraga: </strong>{{ detail.horaentrega || '-' }}</p>
 	</ion-label>
 </ion-item>

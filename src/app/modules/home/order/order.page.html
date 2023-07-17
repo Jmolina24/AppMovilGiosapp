@@ -7,10 +7,10 @@
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
+	<ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
+	color="medium" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
-	color="medium" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 	<app-order-c *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' " [order]="item"></app-order-c>
 </ion-content>
