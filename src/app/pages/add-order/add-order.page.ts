@@ -158,11 +158,15 @@ export class AddOrderPage implements OnInit {
 			}
 
 			if (!data.idtipoorden) {
-				return throwError({ mensaje: 'Ingrese los datos requeridos: El tipo de orden' });
+				return throwError({
+					mensaje: 'Ingrese los datos requeridos: El tipo de orden',
+				});
 			}
 
 			if (!data.idclientesede) {
-				return throwError({ mensaje: 'Ingrese los datos requeridos: Sede' });
+				return throwError({
+					mensaje: 'Ingrese los datos requeridos: Sede',
+				});
 			}
 
 			let content = {
@@ -201,6 +205,8 @@ export class AddOrderPage implements OnInit {
 		}
 
 		return this._orders.createDetail({
+			referencia: '',
+			observacion: '',
 			...data,
 			idorden: response.idorden,
 			iddetalleorden: '0',
