@@ -84,10 +84,11 @@ export class AddOrderPage implements OnInit {
 
 		this.dataDetail = {
 			idservicio: '0',
-			cantidad: '0',
+			cantidad: '',
 			referencia: '',
 			observacion: '',
 		};
+		console.log(this.listDetails);
 	}
 
 	fnCreate(): void {

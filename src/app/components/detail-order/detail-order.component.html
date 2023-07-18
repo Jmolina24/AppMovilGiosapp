@@ -1,13 +1,13 @@
 <ion-item *ngIf="detail" [routerLink]="['../view-info-detail', detail.idorden, detail.iddetalleorden]" [detail]="false">
 	<div slot="start" class="dot dot-unread"></div>
 	<ion-label class="ion-text-wrap">
-		<h2>
-			# {{detail.idorden}} {{ detail.tipoorden }}
+		<h3> <strong>
+			# {{detail.iddetalleorden}} {{ detail.servicio }} </strong>
 			<span class="date">
 				<ion-note>{{ calculateDaysElapsed(detail.fechaentrega) }}</ion-note>
 				<ion-icon aria-hidden="true" name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
 			</span>
-		</h2>
+		</h3>
 		<p> <strong> Cliente:</strong> {{ detail.cliente }}</p>
 		<p> <strong> Sede:</strong> {{ detail.clientesede }}</p>
 		<p> <strong> Fecha de entraga:</strong> {{ (detail.fechaentrega) || '-' }} </p>

@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref="/" text=""></ion-back-button>
 		</ion-buttons>
-		<ion-title>Detalle de Orden</ion-title>
+		<ion-title>Detalle del Servicio</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -12,8 +12,8 @@
 		<ion-item>
 			<ion-label>
 				<div class="border-b-2 border-gray-300 my-2">
-					<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }}  <ion-chip color="primary">{{ item.estado }}</ion-chip></strong>
-					<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
+					<strong> #{{ item.iddetalleorden }}  <ion-chip color="primary">{{ item.estado }}</ion-chip></strong>
+					<p> <strong> Servicio: </strong> {{ item.servicio }} </p>
 					<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
 					<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
 					<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
