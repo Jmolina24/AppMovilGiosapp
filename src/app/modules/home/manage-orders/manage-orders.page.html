@@ -8,5 +8,5 @@
 
 
 <ion-content [fullscreen]="true">	
-	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'servicio' " [detail]="item"></app-detail-order>
+	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'" [detail]="item"></app-detail-order>
 </ion-content>
