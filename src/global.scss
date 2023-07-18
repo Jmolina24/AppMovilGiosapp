@@ -31,89 +31,96 @@
 /* Tailwind */
 @import './tailwind.scss';
 
-.text-decoration{
-    text-decoration:none;
+.text-decoration {
+    text-decoration: none;
 }
 
-.text-transform-initial{
-    text-transform: initial!important;
+.text-transform-initial {
+    text-transform: initial !important;
 }
 
-.text-transform-capitalize{
-    text-transform: capitalize!important;
+.text-transform-capitalize {
+    text-transform: capitalize !important;
 }
+
 .d-flex {
     display: flex !important;
 }
 
 /*  Style new Theme */
- .style-ion-title{    
-    font-weight: bold!important;
-    color: #1068af!important; 
+.style-ion-title {
+    font-weight: bold !important;
+    color: #1068af !important;
     font-family: "Poppins-title";
 }
-ion-title{
+
+ion-title {
     font-family: "Poppins-title";
     font-size: 15px;
+    color: #1068af !important;
 }
-h1{
+
+h1 {
     // font-size: 33px!important;
-    font-weight: bold!important;
-    color: #1068af!important; 
+    font-weight: bold !important;
+    color: #1068af !important;
     font-family: "Poppins-title";
 }
 
-.style-subtitle{
-    font-size: 16px!important;    
-    color: #1068af!important; 
+.style-subtitle {
+    font-size: 16px !important;
+    color: #1068af !important;
     font-family: "Poppins-subtitle";
 }
-.style-button-action{
+
+.style-button-action {
     margin-left: auto;
     margin-right: auto;
-    display: table;   
+    display: table;
 }
-p{         
-    font-family: "Poppins-paragraph";   
-    color: #000000; 
+
+p {
+    font-family: "Poppins-paragraph";
+    color: #000000;
 }
-a{
-    color: #1068af!important; 
+
+a {
+    color: #1068af !important;
 }
 
 
-ion-button{
-    font-size: 20px;
+ion-button {
+    font-size: 15px;
 }
 
-ion-label{
-    color: #000000!important;
-    font-family: "Poppins-paragraph"!important;   
+ion-label {
+    color: #000000 !important;
+    font-family: "Poppins-paragraph" !important;
 }
 
-ion-avatar{
+ion-avatar {
     border: 3px solid #1068af !important;
     width: 8vh;
-    height:8vh;
+    height: 8vh;
 }
 
-.color-blue{
-    color: #1068af!important; 
+.color-blue {
+    color: #1068af !important;
 }
 
-.itemenu{
-    font-family: "Poppins-paragraph";   
-    color: #1068af!important; 
+.itemenu {
+    font-family: "Poppins-paragraph";
+    color: #1068af !important;
 }
 
-.login{
+.login {
     text-align: center;
     font-size: 13px;
     // margin-top: 5px;    
 }
 
 
-.img-cajacacopi{    
+.img-cajacacopi {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -121,25 +128,26 @@ ion-avatar{
 }
 
 
-.card-thumb{
+.card-thumb {
     display: inline-block;
     border: 1px solid #ddd;
     padding: 10px;
     width: 45vh;
     height: 45vh;
     box-shadow: none;
-  }
-  .list-card{
+}
+
+.list-card {
     height: 100%;
     white-space: nowrap;
-  }
-  
+}
 
-  .icon-close-modal{
-    font-size: 30px!important;
-    margin-right: 10px!important;
-  }
-  
-  .ion-no-margin{
-      margin: 0!important;
-  }
+
+.icon-close-modal {
+    font-size: 30px !important;
+    margin-right: 10px !important;
+}
+
+.ion-no-margin {
+    margin: 0 !important;
+}

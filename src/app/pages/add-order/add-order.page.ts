@@ -88,7 +88,7 @@ export class AddOrderPage implements OnInit {
 			referencia: '',
 			observacion: '',
 		};
-		console.log(this.listDetails);
+		this.addService = false;
 	}
 
 	fnCreate(): void {
