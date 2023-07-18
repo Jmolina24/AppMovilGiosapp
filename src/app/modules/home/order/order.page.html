@@ -1,16 +1,17 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-title>Orden</ion-title>
-		<ion-buttons [collapse]="true" slot="end">
-			<ion-button class="bg-blue-400 rounded-md shadow-sm text-white" [routerLink]="['/add-order']">
-				<ion-icon name="add-outline"></ion-icon>
-			</ion-button>
-		</ion-buttons>
 	</ion-toolbar>
 	<ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
 	color="medium" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<app-order-c *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' " [order]="item"></app-order-c>
+	<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+		<ion-fab-button size="small" [routerLink]="['/add-order']">
+		  <ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	  </ion-fab>
+	<app-order-c *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' | orderby:'desc':'idorden' " [order]="item"></app-order-c>
+	
 </ion-content>

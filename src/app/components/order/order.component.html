@@ -1,16 +1,16 @@
 <ion-item *ngIf="order" [routerLink]="'../view-info/' + order.idorden" [detail]="false">
 	<div slot="start" class="dot dot-unread"></div>
 	<ion-label class="ion-text-wrap">
-		<h2>
-			{{ order.tipoorden }}
+		<h3> 
+			<strong> # {{order.idorden}} {{ order.tipoorden }} </strong>
 			<span class="date">
 				<ion-note>hace {{ calculateDaysElapsed(order.fecharegistro) }} dia(s)</ion-note>
 				<ion-icon aria-hidden="true" name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
 			</span>
-		</h2>
-		<h3>{{ order.clientesede }} ({{ order.cliente }})</h3>
-		<p>
-			Fecha - Hora de entraga: {{ (order.fechaentrega) || '-' }} - {{ order.horaentrega || '-' }}
-		</p>
+		</h3>
+		<p> <strong> Cliente:</strong> {{ order.cliente }}</p>
+		<p> <strong> Sede:</strong> {{ order.clientesede }}</p>
+		<p> <strong> Fecha de entraga:</strong> {{ (order.fechaentrega) || '-' }} </p>
+		<p> <strong> Hora de entraga: </strong>{{ order.horaentrega || '-' }}</p>
 	</ion-label>
 </ion-item>
