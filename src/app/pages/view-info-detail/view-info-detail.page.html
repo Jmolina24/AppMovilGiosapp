@@ -11,15 +11,15 @@
 	<ion-list *ngIf="loaded">
 		<ion-item>
 			<ion-label>
-				<div class="border-b-2 border-gray-300 my-4">
-					<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }} </strong>
+				<div class="border-b-2 border-gray-300 my-2">
+					<strong> #{{ item.iddetalleorden }} {{ item.tipoorden }}  <ion-chip color="primary">{{ item.estado }}</ion-chip></strong>
 					<p> <strong> Servicio: </strong> {{ item.servicio }}</p>
 					<p> <strong> Cantidad: </strong> {{ item.cantidad }}</p>
 					<p>{{ item.ciudadservicio }} - {{ item.deptoservicio}}</p>
 					<p>{{ item.fechaentrega}} - {{ item.horaentrega }}</p>
 				</div>
 				<ng-container>
-					<div class="border-b-2 border-gray-300 my-4">
+					<div class="border-b-2 border-gray-300 my-2">
 						<p> <strong> Cliente: </strong> {{ item.cliente }}</p>
 						<p> <strong> Sede: </strong> {{ item.clientesede }}</p>
 						<p> <strong> Fecha de Entrega: </strong> {{ item.fechaentrega }}</p>
@@ -32,7 +32,7 @@
 					</div>
 					<ng-container *ngIf="true">
 						<!-- <ng-container *ngIf="viewInfoOrden"> -->
-						<div class="border-b-2 border-gray-300 my-4">
+						<div class="border-b-2 border-gray-300 my-2">
 							<p> <strong> Tipo de Servicio: </strong> {{ item.tipoorden }}</p>
 							<p> <strong> Tercero: </strong> {{ item.tercero || 'Sin tercero' }}</p>
 							<p> <strong> Referencia: </strong> {{ item.referencia }}</p>
@@ -40,7 +40,7 @@
 						</div>
 						<ng-container *ngIf="![2, 3, 4].includes(idrole)">
 							<ng-container *ngIf="![2].includes(idrole)">
-								<div class="border-b-2 border-gray-300 my-4">
+								<div class="border-b-2 border-gray-300 my-2">
 									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{
 										item.precio_compra | currency:"COP ":"symbol"}}</p>
 									<p *ngIf="!item.precio_compra"> <strong> Precio de Compra: </strong> Sin precio de
@@ -49,7 +49,7 @@
 							</ng-container>
 
 							<ng-container *ngIf="![3, 4].includes(idrole)">
-								<div class="border-b-2 border-gray-300 my-4">
+								<div class="border-b-2 border-gray-300 my-2">
 									<p *ngIf="item.precio_venta"> <strong> Precio de Venta: </strong> {{
 										item.precio_venta | currency:"COP ":"symbol"}}</p>
 									<p *ngIf="!item.precio_venta"> <strong> Precio de Venta: </strong> Sin precio de
@@ -59,7 +59,7 @@
 
 
 							<ng-container *ngIf="![2].includes(idrole)">
-								<div class="border-b-2 border-gray-300 my-4">
+								<div class="border-b-2 border-gray-300 my-2">
 									<p *ngIf="item.precio_compra"> <strong> Total de Precio de Compra: </strong> {{
 										(item.precio_compra * item.cantidad) | currency:"COP":"symbol"}}</p>
 									<p *ngIf="!item.precio_compra"> <strong> Total de Precio de Compra: </strong> Sin
@@ -68,7 +68,7 @@
 							</ng-container>
 
 							<ng-container *ngIf="![3, 4].includes(idrole)">
-								<div class="border-b-2 border-gray-300 my-4">
+								<div class="border-b-2 border-gray-300 my-2">
 									<p *ngIf="item.precio_venta"> <strong> Total Precio de Venta: </strong>{{
 										(item.precio_venta * item.cantidad) | currency:"COP":"symbol"}}</p>
 									<p *ngIf="!item.precio_venta"> <strong> Total Precio de Venta: </strong>Sin precio
@@ -81,7 +81,7 @@
 					<ng-container *ngIf="false">
 						<!-- <ng-container *ngIf="viewInfoOrden"> -->
 						<ng-container *ngIf="true">
-							<div class="grid grid-cols-2 grid-rows-2 gap-4 my-4 pb-2 border-b-2 border-gray-300">
+							<div class="grid grid-cols-2 grid-rows-2 gap-4 my-2 pb-2 border-b-2 border-gray-300">
 								<ng-container *ngIf="true">
 									<p *ngIf="item.precio_compra"> <strong> Precio de Compra: </strong> {{
 										item.precio_compra | currency:"COP ":"symbol"}}</p>
