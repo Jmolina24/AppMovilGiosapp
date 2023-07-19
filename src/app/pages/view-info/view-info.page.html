@@ -308,14 +308,6 @@
 								(click)="getThirdsServices(item)">
 								Asignar
 							</ion-button>
-							<ion-modal #modal [isOpen]="isOpen">
-								<ng-template>
-									<app-assign class="ion-page" title="Asignar tercero" [items]="list"
-										[iddetalleorden]="item.iddetalleorden" [selectedItems]="selected"
-										(selectionChange)="selectionChanged($event)"
-										(selectionCancel)="modal.dismiss()"></app-assign>
-								</ng-template>
-							</ion-modal>
 						</ng-container>
 
 						<ng-container *ngIf="item.estado === 'ASIGNADA'">
@@ -365,6 +357,14 @@
 				</div>
 			</div>
 		</ng-container>
+		<ion-modal #modal [isOpen]="isOpen">
+			<ng-template>
+				<app-assign class="ion-page" title="Asignar tercero" [items]="list"
+					[iddetalleorden]="info" [selectedItems]="selected"
+					(selectionChange)="selectionChanged($event)"
+					(selectionCancel)="modal.dismiss()"></app-assign>
+			</ng-template>
+		</ion-modal>
 	</ng-container>
 	<ng-template #noContent>
 		<span class="px-6 py-4 text-center">Sin información</span>

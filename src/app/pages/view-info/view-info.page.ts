@@ -19,6 +19,8 @@ export class ViewInfoPage implements OnInit {
 	isOpen = false;
 	isOpenFile = false;
 
+	info = 0;
+
 	public order!: Order;
 	public detailOrder: OrderDetail[] = [];
 
@@ -74,8 +76,9 @@ export class ViewInfoPage implements OnInit {
 		this.get();
 	}
 
-	getThirdsServices({ idservicio, idciudadservicio }: any): void {
+	getThirdsServices({ idservicio, idciudadservicio, iddetalleorden }: any): void {
 		this.isOpen = false;
+		this.info = iddetalleorden;
 		this._rates
 			.get({ idservicio, idciudad: idciudadservicio })
 			.subscribe((response: any[]) => {
