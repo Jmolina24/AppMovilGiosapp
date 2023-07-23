@@ -27,15 +27,22 @@ const routes: Routes = [
 					),
 			},
 			{
+				path: 'score',
+				loadChildren: () =>
+					import('./../../modules/home/score/score.module').then(
+						(m) => m.ScorePageModule
+					),
+			},
+			{
 				path: '',
-				redirectTo: '/manage-orders',
+				redirectTo: '/score',
 				pathMatch: 'full',
 			},
 		],
 	},
 	{
 		path: '',
-		redirectTo: '/manage-orders',
+		redirectTo: '/score',
 		pathMatch: 'full',
 	},
 ];

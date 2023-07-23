@@ -1,12 +1,19 @@
 <ion-header no-border [translucent]="true">
 	<ion-toolbar>
-		<ion-title  text-capitalize>Servicios Asignados</ion-title>
+		<ion-title text-capitalize>Servicios Asignados</ion-title>
 	</ion-toolbar>
-	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar" show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
+	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
+		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 </ion-header>
 
 
 
-<ion-content [fullscreen]="true">	
-	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'" [detail]="item"></app-detail-order>
+<ion-content [fullscreen]="true">
+
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	  </ion-refresher>
+
+	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'"
+		[detail]="item"></app-detail-order>
 </ion-content>

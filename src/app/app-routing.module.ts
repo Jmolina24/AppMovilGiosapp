@@ -39,7 +39,8 @@ const routes: Routes = [
 				(m) => m.SignInPageModule
 			),
 		canActivate: [NoAuthGuard],
-	},
+	}
+
 ];
 @NgModule({
 	imports: [

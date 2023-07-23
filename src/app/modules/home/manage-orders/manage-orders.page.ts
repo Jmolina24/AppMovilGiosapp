@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { OrderDetail } from 'src/app/core/interfaces/order-detail';
 import { Action, MenuService } from 'src/app/core/services/menu.service';
 import { OrdersService } from 'src/app/core/services/order.service';
@@ -28,6 +29,13 @@ export class ManageOrdersPage implements OnInit {
 			this.get();
 		}
 	}
+	handleRefresh(event: any) {
+		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => {
+			this.list = r;
+			event.target.complete();
+		});
+	}
+
 
 	get(): void {
 		this._api.getDetails({ idorden: 0, idtercero: this.idtercero }).subscribe((r) => {

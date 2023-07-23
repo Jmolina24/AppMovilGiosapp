@@ -1,0 +1,62 @@
+
+  ion-content {
+	
+	
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+
+    ion-card {
+        --ion-background-color: #ffffff;
+        --ion-border-radius: 16px;
+      }
+      
+      .total-card {
+        --ion-background-color: #3880ff;
+        color: #ffffff;
+      }
+      
+      .made-card {
+        --ion-background-color: #00c851;
+        color: #ffffff;
+      }
+      
+      .assigned-card {
+        --ion-background-color: #20c997;
+        color: #ffffff;
+      }
+      
+      .to-assign-card {
+        --ion-background-color: #ff922b;
+        color: #ffffff;
+      }
+      
+      .cancelled-card {
+        --ion-background-color: #ff3547;
+        color: #ffffff;
+      }
+      
+      ion-card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+      }
+      
+      .value {
+        font-size: 40px;
+        font-weight: bold;
+      }
+      
+      .label {
+        font-size: 14px;
+      }
+      
+
+
+
+}

@@ -32,6 +32,20 @@ export class OrderPage implements OnInit {
 		}
 	}
 
+	handleRefresh(event: any) {
+		this._api
+			.get({ idorden: 0 })
+			.subscribe((r) => {
+				this.list = r;
+				this.filteredList = r;
+				event.target.complete();
+			});
+
+	}
+
+
+
+
 	get(): void {
 		this._api
 			.get({ idorden: 0 })
@@ -43,7 +57,6 @@ export class OrderPage implements OnInit {
 	}
 
 	buscar(event: any) {
-		// const textoBusqueda = event.target.value.toLowerCase();
 		this.textoBusqueda = event.target.value.toLowerCase();
 
 	}

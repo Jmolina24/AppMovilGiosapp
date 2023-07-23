@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
 
 	ngOnInit() {
 		this.menu = JSON.parse(JSON.stringify(this._menu.getMenuAccess().map((r) => r.id)));
+		console.log('Menu',this.menu);
 	}
 
 	hasAccess(id: Module): boolean {

@@ -6,6 +6,7 @@ type Id = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type Module =
 	| 'home'
 	| 'process'
+	| 'process.score'
 	| 'process.orders'
 	| 'process.assigned-services';
 
