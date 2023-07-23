@@ -116,48 +116,54 @@
 
 				<ion-grid [fixed]="true">
 					<ion-row>
-						<ng-container *ngIf="item.estado === 'ASIGNADA'">
-							<ion-col>
-								<ion-button size="small"
-									(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
-									Cargar
-								</ion-button>
-								<ion-modal #modal [isOpen]="isOpenFile">
-									<ng-template>
-										<app-file class="ion-page" title="Cargar" [items]="listSupports" action="upload"
-											[iddetalleorden]="item.iddetalleorden"
-											(selectionChange)="selectionChanged($event)"
-											(selectionCancel)="modal.dismiss()"></app-file>
-									</ng-template>
-								</ion-modal>
-							</ion-col>
-						</ng-container>
-						<ng-container *ngIf="!['ASIGNADA', 'POR ASIGNAR'].includes(item.estado)">
-							<ion-col>
-								<ion-button size="small" color="tertiary"
-									(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
-									Vizualizar Soportes</ion-button>
+						<ng-container *ngIf="getAction('upload_support')">
+							<ng-container *ngIf="item.estado === 'ASIGNADA'">
+								<ion-col>
+									<ion-button size="small"
+										(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
+										Cargar
+									</ion-button>
 									<ion-modal #modal [isOpen]="isOpenFile">
 										<ng-template>
-											<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
-												[iddetalleorden]="item.iddetalleorden" (selectionChange)="selectionChanged($event)"
+											<app-file class="ion-page" title="Cargar" [items]="listSupports" action="upload"
+												[iddetalleorden]="item.iddetalleorden"
+												(selectionChange)="selectionChanged($event)"
 												(selectionCancel)="modal.dismiss()"></app-file>
 										</ng-template>
 									</ion-modal>
-							</ion-col>
+								</ion-col>
+							</ng-container>
+						</ng-container>
+						<ng-container *ngIf="getAction('view_support')">
+							<ng-container *ngIf="!['ASIGNADA', 'POR ASIGNAR'].includes(item.estado)">
+								<ion-col>
+									<ion-button size="small" color="tertiary"
+										(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
+										Vizualizar Soportes</ion-button>
+										<ion-modal #modal [isOpen]="isOpenFile">
+											<ng-template>
+												<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
+													[iddetalleorden]="item.iddetalleorden" (selectionChange)="selectionChanged($event)"
+													(selectionCancel)="modal.dismiss()"></app-file>
+											</ng-template>
+										</ion-modal>
+								</ion-col>
+							</ng-container>
 						</ng-container>
 					</ion-row>
 				</ion-grid>
 				<ion-grid [fixed]="true">
-					<ng-container *ngIf="item.estado === 'ASIGNADA'">
-						<ion-row>
-							<ion-col>
-								<ion-button color="success" expand="full" (click)="changeStatusOrderDetail(item, 'P')">
-									<ion-icon size="small" slot="end" name="send-outline"></ion-icon>
-									Finalizar
-								</ion-button>
-							</ion-col>
-						</ion-row>
+					<ng-container *ngIf="getAction('changeStatusDetail')">
+						<ng-container *ngIf="item.estado === 'ASIGNADA'">
+							<ion-row>
+								<ion-col>
+									<ion-button color="success" expand="full" (click)="changeStatusOrderDetail(item, 'P')">
+										<ion-icon size="small" slot="end" name="send-outline"></ion-icon>
+										Finalizar
+									</ion-button>
+								</ion-col>
+							</ion-row>
+						</ng-container>
 					</ng-container>
 				</ion-grid>
 			</ion-label>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonModal, Platform } from '@ionic/angular';
 import { OrderDetail } from 'src/app/core/interfaces/order-detail';
+import { Action, MenuService } from 'src/app/core/services/menu.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { RatesService } from 'src/app/core/services/rates.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -38,20 +39,29 @@ export class ViewInfoPage implements OnInit {
 
 	public listSupport: any[] = [];
 
+	actions: Action[] = [];
+
+
 	constructor(
 		private _storage: StorageService,
 		private api: OrdersService,
-		private _rates: RatesService
-	) {}
+		private _rates: RatesService,
+		private _menu: MenuService
+	) { }
 
 	ngOnInit() {
-		this.idrole = this._storage.getRolID();
+		this.actions = this._menu.getActions('process.orders');
 
-		this.idorden = this.activatedRoute.snapshot.paramMap.get(
-			'id'
-		) as string;
+		if (this.getAction('list')) {
+			this.idrole = this._storage.getRolID();
 
-		this.get();
+			this.idorden = this.activatedRoute.snapshot.paramMap.get(
+				'id'
+			) as string;
+
+			this.get();
+		}
+
 	}
 
 	get(): void {
@@ -140,5 +150,9 @@ export class ViewInfoPage implements OnInit {
 			this.listSupport = response;
 			this.isOpenFile = true;
 		});
+	}
+
+	getAction(item: Action): boolean {
+		return this.actions.includes(item);
 	}
 }

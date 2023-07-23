@@ -18,9 +18,7 @@ export class DetailOrderComponent implements OnInit {
 
 	constructor(private _storage: StorageService) {}
 
-	ngOnInit() {
-		console.log(this.detail);
-	}
+	ngOnInit() {}
 
 	isIos() {
 		return this.platform.is('ios');

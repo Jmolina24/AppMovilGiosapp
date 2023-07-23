@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Action, MenuService } from 'src/app/core/services/menu.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { Order } from 'src/app/interfaces/order';
@@ -9,17 +10,26 @@ import { Order } from 'src/app/interfaces/order';
 	styleUrls: ['./order.page.scss'],
 })
 export class OrderPage implements OnInit {
+
 	list: Order[] = [];
 	filteredList: Order[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 	textoBusqueda = '';
+
+	actions: Action[] = [];
+
 	constructor(
 		private _api: OrdersService,
-		private _storage: StorageService
-	) {}
+		private _storage: StorageService,
+		private _menu: MenuService
+	) { }
 
 	ngOnInit() {
-		this.get();
+		this.actions = this._menu.getActions('process.orders');
+
+		if (this.getAction('list')) {
+			this.get();
+		}
 	}
 
 	get(): void {
@@ -29,14 +39,16 @@ export class OrderPage implements OnInit {
 				this.list = r;
 				this.filteredList = r;
 
-			  });
+			});
 	}
-
 
 	buscar(event: any) {
 		// const textoBusqueda = event.target.value.toLowerCase();
 		this.textoBusqueda = event.target.value.toLowerCase();
-		
-	  }
 
+	}
+
+	getAction(item: Action): boolean {
+		return this.actions.includes(item);
+	}
 }

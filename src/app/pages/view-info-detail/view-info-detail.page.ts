@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { timeInterval, timeout } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { Action, MenuService } from 'src/app/core/services/menu.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { RatesService } from 'src/app/core/services/rates.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -35,29 +36,34 @@ export class ViewInfoDetailPage implements OnInit {
 
 	public selected: string[] = [];
 
+	actions: Action[] = [];
+
+
 	constructor(
 		private _storage: StorageService,
 		private api: OrdersService,
 		private _rates: RatesService,
-		private _alert: AlertService
+		private _alert: AlertService,
+		private _menu: MenuService
 	) { }
 
 	ngOnInit() {
-
 		setTimeout(() => {
 			this.loaded = true;
-		  }, 1000);
+		}, 1000);
 
+		this.actions = this._menu.getActions('process.assigned-services');
 
+		if (this.getAction('view_details')) {
+			this.idorden = this.activatedRoute.snapshot.paramMap.get(
+				'id'
+			) as string;
+			this.iddetalleorden = this.activatedRoute.snapshot.paramMap.get(
+				'iddetalleorden'
+			) as string;
+			this.get();
+		}
 
-
-		this.idorden = this.activatedRoute.snapshot.paramMap.get(
-			'id'
-		) as string;
-		this.iddetalleorden = this.activatedRoute.snapshot.paramMap.get(
-			'iddetalleorden'
-		) as string;
-		this.get();
 	}
 
 	get(): void {
@@ -125,7 +131,6 @@ export class ViewInfoDetailPage implements OnInit {
 							),
 						[]
 					);
-				console.log(this.listSupports);
 				this.isOpenFile = true;
 				return;
 			}
@@ -166,4 +171,8 @@ export class ViewInfoDetailPage implements OnInit {
 			);
 	}
 
+
+	getAction(item: Action): boolean {
+		return this.actions.includes(item);
+	}
 }

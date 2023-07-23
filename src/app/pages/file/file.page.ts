@@ -59,7 +59,6 @@ export class FilePage implements OnInit {
 
 		this.files = [];
 		this.listFiles = [];
-		console.log(this.items);
 	}
 
 	trackItems(index: number, item: any) {

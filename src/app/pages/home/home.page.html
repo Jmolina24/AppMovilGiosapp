@@ -1,15 +1,20 @@
 <ion-content [fullscreen]="true">
 	<ion-tabs>
 		<ion-tab-bar slot="bottom">
-			<ion-tab-button tab="manage-orders">
-				<ion-icon aria-hidden="true" name="list-outline"></ion-icon>
-				<ion-label>Servicios Asignados</ion-label>
-			</ion-tab-button>
 
-			<ion-tab-button tab="order">
-				<ion-icon name="create-outline"></ion-icon>
-				<ion-label>Orden</ion-label>
-			</ion-tab-button>
+			<ng-container *ngIf="hasAccess('process.assigned-services')">
+				<ion-tab-button tab="manage-orders">
+					<ion-icon aria-hidden="true" name="list-outline"></ion-icon>
+					<ion-label>Servicios Asignados</ion-label>
+				</ion-tab-button>
+			</ng-container>
+
+			<ng-container *ngIf="hasAccess('process.orders')">
+				<ion-tab-button tab="order">
+					<ion-icon name="create-outline"></ion-icon>
+					<ion-label>Orden</ion-label>
+				</ion-tab-button>
+			</ng-container>
 
 			<ion-tab-button tab="profile">
 				<ion-icon name="person-circle-outline"></ion-icon>

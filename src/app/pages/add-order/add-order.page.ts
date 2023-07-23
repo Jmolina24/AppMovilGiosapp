@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { ServicesService } from 'src/app/core/services/services.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -34,7 +34,7 @@ export class AddOrderPage implements OnInit {
 		private _services: ServicesService,
 		private loadingCtrl: LoadingController,
 		private alertController: AlertController,
-		private _router: Router
+		private _storage: StorageService
 	) {}
 
 	ngOnInit() {
@@ -46,12 +46,20 @@ export class AddOrderPage implements OnInit {
 	getClients(): void {
 		this._clients.get().subscribe((response) => {
 			this.listCustomers = response;
+
+			this.data.idcliente = this._storage.getUser().idcliente;
+
+			if (this.data.idcliente) {
+				this.getSites(this.data.idcliente);
+			}
 		});
 	}
 
 	getSites(idcliente: string | number): void {
 		this._clients.bySite({ idcliente }).subscribe((response) => {
 			this.listSites = response;
+
+			this.data.idclientesede = this._storage.getUser().idclientesede;
 		});
 	}
 
