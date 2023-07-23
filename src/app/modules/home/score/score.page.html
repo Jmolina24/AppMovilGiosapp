@@ -6,6 +6,9 @@
 
 
 <ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	  </ion-refresher>
   <ion-grid>
     <ion-row>
   
@@ -31,7 +34,7 @@
         <ion-card class="shadow to-assign-card">
           <ion-card-content>
             <div class="value">48</div>
-            <div class="label"> <strong> P.Asignar </strong>  </div>
+            <div class="label"> <strong> Pend Asignar </strong>  </div>
           </ion-card-content>
         </ion-card>
       </ion-col>

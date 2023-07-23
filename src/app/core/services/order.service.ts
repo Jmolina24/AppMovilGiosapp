@@ -10,7 +10,7 @@ import { OrderDetail } from '../interfaces/order-detail';
 	providedIn: 'root',
 })
 export class OrdersService {
-	constructor(private _api: ApiService, private _storage: StorageService) {}
+	constructor(private _api: ApiService, private _storage: StorageService) { }
 
 	public get({
 		idorden = 0,
@@ -170,6 +170,23 @@ export class OrdersService {
 			`option/list-detalles-soportes?iddetalleordensoporte=${iddetalleordensoporte}&iddetalleorden=${iddetalleorden}&estado=${estado}`
 		);
 	}
+
+	public getListScore({
+		idcliente = 0,
+		idclientesede = 0,
+		idtercero = '0'
+	}: {
+		idcliente?: string | number;
+		idclientesede?: string | number;
+		idtercero?: '0' | string;
+	} = {}): Observable<any[]> {
+		return this._api.get<any[]>(
+			`option/list-score-app?idcliente=${idcliente}&idclientesede=${idclientesede}&idtercero=${idtercero}`
+		);
+	}
+
+
+
 
 	public uploadSupport(
 		iddetalleordensoporte: string | number,
