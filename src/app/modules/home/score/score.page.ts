@@ -13,6 +13,7 @@ export class ScorePage implements OnInit {
 
   idtercero: string = this._storage.getUser().idtercero;
   _data: ScoreAPP[] = [];
+  _resultado: any = {};
 
   constructor(
     private _api: OrdersService,
@@ -22,14 +23,26 @@ export class ScorePage implements OnInit {
 
 
   ngOnInit() {
+    // this._resultado = {
+    //   "asignadas": 0,
+    //   "pasignar": 0,
+    //   "realizadas": 0,
+    //   "total": 0,
+    //   "anuladas": 0
+    // }
     this.get();
   }
 
   handleRefresh(event: any) {
     this._api.getListScore({ idcliente: 0, idclientesede: 0, idtercero: this.idtercero }).subscribe((r) => {
       this._data = r;
+      const objetoResultado: { [key: string]: number } = {};
+      for (const elemento of this._data) {
+        const { estado, cantidad } = elemento;
+        objetoResultado[estado] = cantidad;
+      }
+      this._resultado = objetoResultado;
       event.target.complete();
-      console.log(this._data);
     });
 
   }
@@ -39,7 +52,12 @@ export class ScorePage implements OnInit {
   get(): void {
     this._api.getListScore({ idcliente: 0, idclientesede: 0, idtercero: this.idtercero }).subscribe((r) => {
       this._data = r;
-      console.log(this._data);
+      const objetoResultado: { [key: string]: number } = {};
+      for (const elemento of this._data) {
+        const { estado, cantidad } = elemento;
+        objetoResultado[estado] = cantidad;
+      }
+      this._resultado = objetoResultado
     });
   }
 
