@@ -2,18 +2,29 @@
 	<ion-toolbar>
 		<ion-title text-capitalize>Servicios Asignados</ion-title>
 	</ion-toolbar>
+
+	<ion-segment [scrollable]="true" value="ASIGNADA" (ionChange)="segmentChanged($event)">
+		<ion-segment-button value="ASIGNADA">
+			<ion-label>ASIGNADA</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="REALIZADA">
+			<ion-label>REALIZADA</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="default">
+			<ion-label>TODOS</ion-label>
+		</ion-segment-button>
+	</ion-segment>
 	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
 		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
 </ion-header>
 
 
 
-<ion-content [fullscreen]="true">
-
+<ion-content>
 	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
-	  </ion-refresher>
-
-	<app-detail-order *ngFor="let item of list | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'"
+	</ion-refresher>
+	<app-detail-order
+		*ngFor="let item of list | filtro: filtroEstado: 'estado' | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'"
 		[detail]="item"></app-detail-order>
 </ion-content>

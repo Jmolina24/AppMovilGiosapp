@@ -17,6 +17,7 @@ export class ManageOrdersPage implements OnInit {
 	filteredList: OrderDetail[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 	textoBusqueda = '';
+	filtroEstado = '';
 
 	actions: Action[] = [];
 
@@ -54,4 +55,18 @@ export class ManageOrdersPage implements OnInit {
 	getAction(item: Action): boolean {
 		return this.actions.includes(item);
 	}
+
+
+	segmentChanged( event:any ){
+		const ValorSegmento = event.detail.value;
+		if (ValorSegmento === 'default' ){
+			this.filtroEstado = '';
+			return;
+		}
+		this.filtroEstado = ValorSegmento;
+
+		console.log(ValorSegmento);
+	}
+
+
 }
