@@ -116,7 +116,7 @@ export class FilePage implements OnInit {
 	}
 
 	getIfExitsIdDetailSoporte(id: any): boolean {
-		return this.items.find((e) => e.iddetalleordensoporte === id);
+		return this.listFiles.find((e) => e.iddetalleordensoporte === id);
 	}
 
 	getNameDetailSoporte(id: any): string {
