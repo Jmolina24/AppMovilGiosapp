@@ -15,7 +15,7 @@ export class OrderPage implements OnInit {
 	filteredList: Order[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 	textoBusqueda = '';
-
+	filtroEstado = '';
 	actions: Action[] = [];
 
 	constructor(
@@ -44,6 +44,16 @@ export class OrderPage implements OnInit {
 	}
 
 
+	segmentChanged( event:any ){
+		const ValorSegmento = event.detail.value;
+		if (ValorSegmento === 'default' ){
+			this.filtroEstado = '';
+			return;
+		}
+		this.filtroEstado = ValorSegmento;
+
+		console.log(ValorSegmento);
+	}
 
 
 	get(): void {

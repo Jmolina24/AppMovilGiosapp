@@ -2,8 +2,23 @@
 	<ion-toolbar>
 		<ion-title text-capitalize>Orden</ion-title>
 	</ion-toolbar>
-	<ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar" color="medium"
-		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
+	<!-- <ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar" color="medium"
+		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar> -->
+
+		<ion-segment [scrollable]="true" value="ACTIVO" (ionChange)="segmentChanged($event)">
+			<ion-segment-button value="ACTIVO">
+				<ion-label>ACTIVO</ion-label>
+			</ion-segment-button>
+			<ion-segment-button value="PROCESADA">
+				<ion-label>PROCESADA</ion-label>
+			</ion-segment-button>
+			<ion-segment-button value="default">
+				<ion-label>TODOS</ion-label>
+			</ion-segment-button>
+		</ion-segment>
+
+
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -19,6 +34,6 @@
 			</ion-fab-button>
 		</ion-fab>
 	</ng-container>
-	<app-order-c *ngFor="let item of list | filtro: textoBusqueda: 'tipoorden' | orderby:'desc':'idorden' "
+	<app-order-c *ngFor="let item of list | filtro: filtroEstado: 'estado' | orderby:'desc':'idorden' "
 		[order]="item"></app-order-c>
 </ion-content>

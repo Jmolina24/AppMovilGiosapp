@@ -14,8 +14,8 @@
 			<ion-label>TODOS</ion-label>
 		</ion-segment-button>
 	</ion-segment>
-	<ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
-		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar>
+	<!-- <ion-searchbar color="medium" (ionInput)="buscar($event)" animated="true" placeholder="Buscar"
+		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar> -->
 </ion-header>
 
 
@@ -25,6 +25,6 @@
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-detail-order
-		*ngFor="let item of list | filtro: filtroEstado: 'estado' | filtro: textoBusqueda: 'servicio' | orderby:'desc':'iddetalleorden'"
+		*ngFor="let item of list | filtro: filtroEstado: 'estado' | orderby:'desc':'iddetalleorden'"
 		[detail]="item"></app-detail-order>
 </ion-content>
