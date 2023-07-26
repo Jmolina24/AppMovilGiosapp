@@ -17,7 +17,7 @@ export class ManageOrdersPage implements OnInit {
 	filteredList: OrderDetail[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 	textoBusqueda = '';
-	filtroEstado = '';
+	filtroEstado = 'G';
 
 	actions: Action[] = [];
 

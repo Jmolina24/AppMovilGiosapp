@@ -15,7 +15,7 @@ export class OrderPage implements OnInit {
 	filteredList: Order[] = [];
 	idtercero: string = this._storage.getUser().idtercero;
 	textoBusqueda = '';
-	filtroEstado = '';
+	filtroEstado = 'A';
 	actions: Action[] = [];
 
 	constructor(

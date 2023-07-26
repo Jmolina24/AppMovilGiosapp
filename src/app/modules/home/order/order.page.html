@@ -5,11 +5,11 @@
 	<!-- <ion-searchbar (ionInput)="buscar($event)" animated="true" placeholder="Buscar" color="medium"
 		show-clear-button="always" clear-icon="trash-bin"></ion-searchbar> -->
 
-		<ion-segment [scrollable]="true" value="ACTIVO" (ionChange)="segmentChanged($event)">
-			<ion-segment-button value="ACTIVO">
+		<ion-segment [scrollable]="true" value="A" (ionChange)="segmentChanged($event)">
+			<ion-segment-button value="A">
 				<ion-label>ACTIVO</ion-label>
 			</ion-segment-button>
-			<ion-segment-button value="PROCESADA">
+			<ion-segment-button value="P">
 				<ion-label>PROCESADA</ion-label>
 			</ion-segment-button>
 			<ion-segment-button value="default">
@@ -21,7 +21,7 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
 	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>

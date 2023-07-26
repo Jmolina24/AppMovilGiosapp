@@ -3,11 +3,11 @@
 		<ion-title text-capitalize>Servicios Asignados</ion-title>
 	</ion-toolbar>
 
-	<ion-segment [scrollable]="true" value="ASIGNADA" (ionChange)="segmentChanged($event)">
-		<ion-segment-button value="ASIGNADA">
+	<ion-segment [scrollable]="true" value="G" (ionChange)="segmentChanged($event)">
+		<ion-segment-button value="G">
 			<ion-label>ASIGNADA</ion-label>
 		</ion-segment-button>
-		<ion-segment-button value="REALIZADA">
+		<ion-segment-button value="P">
 			<ion-label>REALIZADA</ion-label>
 		</ion-segment-button>
 		<ion-segment-button value="default">
@@ -25,6 +25,6 @@
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	<app-detail-order
-		*ngFor="let item of list | filtro: filtroEstado: 'estado' | orderby:'desc':'iddetalleorden'"
+		*ngFor="let item of list | filtro: filtroEstado: 'codigoestado' | orderby:'desc':'iddetalleorden'"
 		[detail]="item"></app-detail-order>
 </ion-content>
