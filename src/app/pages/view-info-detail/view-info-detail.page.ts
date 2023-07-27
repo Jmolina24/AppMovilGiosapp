@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { IonModal, Platform } from '@ionic/angular';
 import { timeInterval, timeout } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { Action, MenuService } from 'src/app/core/services/menu.service';
@@ -14,6 +14,8 @@ import { StorageService } from 'src/app/core/services/storage.service';
 	styleUrls: ['./view-info-detail.page.scss'],
 })
 export class ViewInfoDetailPage implements OnInit {
+	@ViewChild('modalView', { static: true }) modalView!: IonModal;
+	@ViewChild('modalUpload', { static: true }) modalUpload!: IonModal;
 
 	public loaded = false;
 	idorden: any = '';
@@ -89,6 +91,7 @@ export class ViewInfoDetailPage implements OnInit {
 		action: 'upload' | 'view'
 	): void {
 		this.isOpenFile = false;
+		this.isOpen = false;
 		this.api.getSupports({ iddetalleorden }).subscribe((response) => {
 			if (action === 'view') {
 				this.listSupports = response
@@ -131,7 +134,7 @@ export class ViewInfoDetailPage implements OnInit {
 							),
 						[]
 					);
-				this.isOpenFile = true;
+				this.isOpen = true;
 				return;
 			}
 			this.listSupports = response;
@@ -144,7 +147,12 @@ export class ViewInfoDetailPage implements OnInit {
 		return isIos ? 'Regresar' : '';
 	}
 
-	selectionChanged(item: any) { }
+	selectionChanged(item: any) {
+		this.isOpen = false;
+		this.isOpenFile = false;
+
+		this.get();
+	}
 
 
 	changeStatusOrderDetail({ iddetalleorden }: any, status: 'F' | 'P' = 'P'): void {
