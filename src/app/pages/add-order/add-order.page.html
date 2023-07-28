@@ -19,7 +19,8 @@
 
 		<ion-item>
 			<ion-select justify="space-between" placeholder="Seleccionar" [(ngModel)]="data.idcliente" label-placement="floating"
-				(ionChange)="getSites(data.idcliente)">
+				(ionChange)="getSites(data.idcliente)"
+				[disabled]="[2].includes(roleId)">
 				<div slot="label">Cliente <ion-text color="danger">(Requerido)</ion-text></div>
 				<ion-select-option *ngFor="let item of listCustomers" [value]="item.idcliente">{{ item.razonsocial
 					}}</ion-select-option>
