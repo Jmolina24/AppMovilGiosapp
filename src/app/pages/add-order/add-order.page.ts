@@ -29,6 +29,8 @@ export class AddOrderPage implements OnInit {
 
 	isLoading: boolean = false;
 
+	roleId: any = '';
+
 	constructor(
 		private _clients: ClientsService,
 		private _orders: OrdersService,
@@ -46,6 +48,7 @@ export class AddOrderPage implements OnInit {
 	}
 
 	getClients(): void {
+		this.roleId = this._storage.getRolID();
 		this._clients.get().subscribe((response) => {
 			this.listCustomers = response;
 

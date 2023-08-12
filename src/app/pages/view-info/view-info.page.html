@@ -334,14 +334,6 @@
 									(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
 									Cargar
 								</ion-button>
-								<ion-modal #modal [isOpen]="isOpenFile">
-									<ng-template>
-										<app-file class="ion-page" title="Cargar" [items]="listSupport" action="upload"
-											[iddetalleorden]="item.iddetalleorden"
-											(selectionChange)="selectionChanged($event)"
-											(selectionCancel)="modal.dismiss()"></app-file>
-									</ng-template>
-								</ion-modal>
 							</ng-container>
 						</ng-container>
 
@@ -349,21 +341,11 @@
 							<ng-container *ngIf="!['ASIGNADA', 'POR ASIGNAR'].includes(item.estado)">
 								<ion-button type="ion-button"
 									class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
-									(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
+									(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
 									Visualizar Soporte
 								</ion-button>
-
-								<ion-modal #modal [isOpen]="isOpenFile">
-									<ng-template>
-										<app-file class="ion-page" title="Visualizar" [items]="listSupport"
-											action="view" [iddetalleorden]="item.iddetalleorden"
-											(selectionChange)="selectionChanged($event)"
-											(selectionCancel)="modal.dismiss()"></app-file>
-									</ng-template>
-								</ion-modal>
 							</ng-container>
 						</ng-container>
-
 					</div>
 					<div>
 						<ion-button *ngIf="!item.showInfo" (click)="item.showInfo = !item.showInfo" type="ion-button"
@@ -378,11 +360,26 @@
 				</div>
 			</div>
 		</ng-container>
-		<ion-modal #modal [isOpen]="isOpen">
+		<ion-modal #modalThirds [isOpen]="isOpen">
 			<ng-template>
 				<app-assign class="ion-page" title="Asignar tercero" [items]="list" [iddetalleorden]="info"
 					[selectedItems]="selected" (selectionChange)="selectionChanged($event)"
-					(selectionCancel)="modal.dismiss()"></app-assign>
+					(selectionCancel)="modalThirds.dismiss()"></app-assign>
+			</ng-template>
+		</ion-modal>
+
+		<ion-modal #modalView [isOpen]="isOpenFileView">
+			<ng-template>
+				<app-file class="ion-page" title="Visualizar" [items]="listSupport" action="view"
+					[iddetalleorden]="info" (selectionChange)="selectionChanged($event)"
+					(selectionCancel)="modalView.dismiss()"></app-file>
+			</ng-template>
+		</ion-modal>
+
+		<ion-modal #modalUpload [isOpen]="isOpenFile">
+			<ng-template>
+				<app-file class="ion-page" title="Cargar" [items]="listSupport" action="upload" [iddetalleorden]="info"
+					(selectionChange)="selectionChanged($event)" (selectionCancel)="modalUpload.dismiss()"></app-file>
 			</ng-template>
 		</ion-modal>
 	</ng-container>

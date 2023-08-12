@@ -123,12 +123,12 @@
 										(click)="getDetailSupportSelect(item.iddetalleorden, 'upload')">
 										Cargar
 									</ion-button>
-									<ion-modal #modal [isOpen]="isOpenFile">
+									<ion-modal #modalView [isOpen]="isOpenFile">
 										<ng-template>
 											<app-file class="ion-page" title="Cargar" [items]="listSupports" action="upload"
 												[iddetalleorden]="item.iddetalleorden"
 												(selectionChange)="selectionChanged($event)"
-												(selectionCancel)="modal.dismiss()"></app-file>
+												(selectionCancel)="modalView.dismiss()"></app-file>
 										</ng-template>
 									</ion-modal>
 								</ion-col>
@@ -140,11 +140,11 @@
 									<ion-button size="small" color="tertiary"
 										(click)="getDetailSupportSelect(item.iddetalleorden, 'view')">
 										Vizualizar Soportes</ion-button>
-										<ion-modal #modal [isOpen]="isOpenFile">
+										<ion-modal #modalUpload [isOpen]="isOpen">
 											<ng-template>
 												<app-file class="ion-page" title="Visualizar" [items]="listSupports" action="view"
 													[iddetalleorden]="item.iddetalleorden" (selectionChange)="selectionChanged($event)"
-													(selectionCancel)="modal.dismiss()"></app-file>
+													(selectionCancel)="modalUpload.dismiss()"></app-file>
 											</ng-template>
 										</ion-modal>
 								</ion-col>

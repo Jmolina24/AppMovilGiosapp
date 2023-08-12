@@ -82,14 +82,14 @@ export class SignInPage implements OnInit {
 							const menu = this.menu.getMenuAccess().map((r) => r.id);
 							if (menu) {
 								if (menu.includes('process.assigned-services')) {
-									this._router.navigate(['/manage-orders']);
+									this._router.navigate(['/score']);
 									return
 								} else if (menu.includes('process.orders')) {
-									this._router.navigate(['/order']);
+									this._router.navigate(['/score']);
 									return
 								}
 
-								this._router.navigate(['/profile']);
+								this._router.navigate(['/score']);
 
 							}
 

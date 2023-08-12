@@ -14,14 +14,16 @@ import { Order } from 'src/app/interfaces/order';
 	styleUrls: ['./view-info.page.scss'],
 })
 export class ViewInfoPage implements OnInit {
-	@ViewChild('modal', { static: true }) modal!: IonModal;
-
+	@ViewChild('modalThirds', { static: true }) modalThirds!: IonModal;
+	@ViewChild('modalView', { static: true }) modalView!: IonModal;
+	@ViewChild('modalUpload', { static: true }) modalUpload!: IonModal;
 
 	isOpen = false;
 	isOpenFile = false;
 	isOpenView = false;
+	isOpenFileView = false;
 
-	info = 0;
+	info: any = 0;
 
 	public order!: Order;
 	public detailOrder: OrderDetail[] = [];
@@ -42,13 +44,12 @@ export class ViewInfoPage implements OnInit {
 
 	actions: Action[] = [];
 
-
 	constructor(
 		private _storage: StorageService,
 		private api: OrdersService,
 		private _rates: RatesService,
 		private _menu: MenuService
-	) { }
+	) {}
 
 	ngOnInit() {
 		this.actions = this._menu.getActions('process.orders');
@@ -62,7 +63,6 @@ export class ViewInfoPage implements OnInit {
 
 			this.get();
 		}
-
 	}
 
 	get(): void {
@@ -102,7 +102,7 @@ export class ViewInfoPage implements OnInit {
 		this.selected = item;
 		this.isOpen = false;
 		this.isOpenFile = false;
-		this.isOpenView = false;
+		this.isOpenFileView = false;
 
 		this.get();
 	}
@@ -111,7 +111,11 @@ export class ViewInfoPage implements OnInit {
 		this.isOpenView = true;
 	}
 
-	getThirdsServices({ idservicio, idciudadservicio, iddetalleorden }: any): void {
+	getThirdsServices({
+		idservicio,
+		idciudadservicio,
+		iddetalleorden,
+	}: any): void {
 		this.isOpen = false;
 		this.info = iddetalleorden;
 		this._rates
@@ -127,8 +131,10 @@ export class ViewInfoPage implements OnInit {
 		iddetalleorden: string | number,
 		action: 'upload' | 'view'
 	): void {
-		this.isOpenFile = false
+		this.isOpenFile = false;
+		this.isOpenFileView = false;
 		this.api.getSupports({ iddetalleorden }).subscribe((response) => {
+			this.info = iddetalleorden.toString();
 			if (action === 'view') {
 				this.listSupport = response
 					.filter(({ estado }) => estado === 'CARGADO')
@@ -170,6 +176,8 @@ export class ViewInfoPage implements OnInit {
 							),
 						[]
 					);
+
+				this.isOpenFileView = true;
 				return;
 			}
 			this.listSupport = response;
