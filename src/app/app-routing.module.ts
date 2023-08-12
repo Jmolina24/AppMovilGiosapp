@@ -39,7 +39,11 @@ const routes: Routes = [
 				(m) => m.SignInPageModule
 			),
 		canActivate: [NoAuthGuard],
-	}
+	},  {
+    path: 'view-file-start',
+    loadChildren: () => import('./pages/view-file-start/view-file-start.module').then( m => m.ViewFileStartPageModule)
+  }
+
 
 ];
 @NgModule({

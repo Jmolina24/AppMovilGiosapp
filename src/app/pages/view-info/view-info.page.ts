@@ -19,6 +19,7 @@ export class ViewInfoPage implements OnInit {
 
 	isOpen = false;
 	isOpenFile = false;
+	isOpenView = false;
 
 	info = 0;
 
@@ -70,7 +71,26 @@ export class ViewInfoPage implements OnInit {
 
 		this.api
 			.getDetails({ idorden })
-			.subscribe((r) => (this.detailOrder = r));
+			.subscribe((r) => (
+				this.detailOrder = r.map((t) => {
+					let soporte = JSON.parse(t.soporte);
+					soporte = soporte.map(({ path: t, name }: any, index: number) => {
+						const url =
+							'https://demo.mainsoft.technology' +
+							t.split('/web')[1];
+						const y = url.split('.');
+						const tipo = y[y.length - 1].toUpperCase();
+						const supportObject = {
+							tipo,
+							soporte: url,
+							name,
+							index: index + 1
+						};
+						return supportObject;
+					});
+					return { ...t, soporte };
+				})
+			));
 	}
 
 	getBackButtonText() {
@@ -82,8 +102,13 @@ export class ViewInfoPage implements OnInit {
 		this.selected = item;
 		this.isOpen = false;
 		this.isOpenFile = false;
+		this.isOpenView = false;
 
 		this.get();
+	}
+
+	showPanelSupport(): void {
+		this.isOpenView = true;
 	}
 
 	getThirdsServices({ idservicio, idciudadservicio, iddetalleorden }: any): void {

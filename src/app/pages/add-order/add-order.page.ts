@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Observable, forkJoin, of, throwError } from 'rxjs';
+import { Observable, catchError, forkJoin, of, switchMap, throwError } from 'rxjs';
 import { ClientsService } from 'src/app/core/services/clients.service';
+import { FilesService } from 'src/app/core/services/files.service';
 import { OrdersService } from 'src/app/core/services/order.service';
 import { ServicesService } from 'src/app/core/services/services.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -34,7 +35,8 @@ export class AddOrderPage implements OnInit {
 		private _services: ServicesService,
 		private loadingCtrl: LoadingController,
 		private alertController: AlertController,
-		private _storage: StorageService
+		private _storage: StorageService,
+		private _file: FilesService
 	) {}
 
 	ngOnInit() {
@@ -95,6 +97,7 @@ export class AddOrderPage implements OnInit {
 			cantidad: '',
 			referencia: '',
 			observacion: '',
+			soporte: []
 		};
 		this.addService = false;
 	}
@@ -213,13 +216,29 @@ export class AddOrderPage implements OnInit {
 			return of(null);
 		}
 
-		return this._orders.createDetail({
-			referencia: '',
-			observacion: '',
-			...data,
-			idorden: response.idorden,
-			iddetalleorden: '0',
+		const formData = new FormData();
+
+		data.soporte.forEach(({ file }: any) => {
+			formData.append('files', file);
 		});
+
+		return this._file.upload(formData).pipe(
+			switchMap(({ rutas }) => {
+				const soporte = rutas.map(({ path, originalname }: any) => ({ path, name: originalname }));
+
+				return this._orders.createDetail({
+					referencia: '',
+					observacion: '',
+					...data,
+					idorden: response.idorden,
+					iddetalleorden: '0',
+					soporte: JSON.stringify(soporte),
+				})
+			}),
+			catchError(error => {
+				return throwError(error); // or throwError(error) if you want to propagate the error
+			})
+		);
 	}
 
 	clear(): void {
@@ -278,5 +297,23 @@ export class AddOrderPage implements OnInit {
 		const seconds = String(fecha.getSeconds()).padStart(2, '0');
 
 		return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+	}
+
+	onFileChange(event: any): void {
+		let pFileList = event.target.files;
+		pFileList = Array.from(pFileList);
+
+		if (!pFileList) {
+			return;
+		}
+
+		this.dataDetail.soporte = pFileList.map((file: any, index: number) => ({
+			file,
+			id: new Date().getTime() + index
+		}));
+	}
+
+	deleteFile(id: number): void {
+		this.dataDetail.soporte = this.dataDetail.soporte.filter((r: any) => r.id !== id);
 	}
 }

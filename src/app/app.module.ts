@@ -18,6 +18,7 @@ import { AddOrderPage } from './pages/add-order/add-order.page';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PipesModule } from './pipes/pipes.module';
+import { ViewFileStartPage } from './pages/view-file-start/view-file-start.page';
 
 @NgModule({
 	declarations: [
@@ -29,6 +30,7 @@ import { PipesModule } from './pipes/pipes.module';
 		HomePage,
 		ViewInfoDetailPage,
 		AddOrderPage,
+		ViewFileStartPage
 	],
 	imports: [
 		BrowserModule,

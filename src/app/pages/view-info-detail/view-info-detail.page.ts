@@ -25,6 +25,7 @@ export class ViewInfoDetailPage implements OnInit {
 
 	isOpen = false;
 	isOpenFile = false;
+	isOpenView = false;
 	showImg = false;
 
 	listSupports: any[] = [];
@@ -71,7 +72,26 @@ export class ViewInfoDetailPage implements OnInit {
 
 		this.api
 			.getDetails({ idorden, iddetalleorden })
-			.subscribe((r) => (this.item = r[0]));
+			.subscribe((r) => {
+				const item = r[0];
+
+				let soporte = JSON.parse(item.soporte);
+				soporte = soporte.map(({ path: t, name }: any, index: number) => {
+					const url =
+						'https://demo.mainsoft.technology' +
+						t.split('/web')[1];
+					const y = url.split('.');
+					const tipo = y[y.length - 1].toUpperCase();
+					const supportObject = {
+						tipo,
+						soporte: url,
+						name,
+						index: index + 1
+					};
+					return supportObject;
+				});
+				this.item = { ...item, soporte };
+			});
 	}
 	getThirdsServices({ idservicio, idciudadservicio }: any): void {
 		this.isOpen = false;
@@ -174,5 +194,9 @@ export class ViewInfoDetailPage implements OnInit {
 
 	getAction(item: Action): boolean {
 		return this.actions.includes(item);
+	}
+
+	showPanelSupport(): void {
+		this.isOpenView = true;
 	}
 }

@@ -30,4 +30,5 @@ export interface OrderDetail {
 	estado: string;
 	codigoestado: string;
 	showInfo: boolean;
+	soporte: any;
 }
