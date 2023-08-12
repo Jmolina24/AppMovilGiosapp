@@ -62,11 +62,13 @@ export class OrdersService {
 
 	public changeStatusOrderDatails(
 		iddetalleorden = '0',
-		status: string = 'F'
+		status: string = 'F',
+		observacion_tercero = ''
 	): Observable<any> {
 		return this._api.post('admin/orden-detalle-status/' + status, {
 			iddetalleorden,
 			idusuarioregistra: this._storage.getUserId(),
+			observacion_tercero
 		});
 	}
 

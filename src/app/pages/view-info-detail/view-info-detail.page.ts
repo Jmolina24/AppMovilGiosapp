@@ -78,7 +78,7 @@ export class ViewInfoDetailPage implements OnInit {
 				const item = r[0];
 
 				let soporte = JSON.parse(item.soporte);
-				soporte = soporte.map(({ path: t, name }: any, index: number) => {
+				soporte = soporte?.map(({ path: t, name }: any, index: number) => {
 					const url =
 						'https://demo.mainsoft.technology' +
 						t.split('/web')[1];
@@ -176,27 +176,29 @@ export class ViewInfoDetailPage implements OnInit {
 
 
 	changeStatusOrderDetail({ iddetalleorden }: any, status: 'F' | 'P' = 'P'): void {
-		this._alert.loading();
+		this._alert.textArea({ header: 'Observación' }, ({ text: observacion_tercero }: { text: string }) => {
+			this._alert.loading();
 
-		this.api
-			.changeStatusOrderDatails(iddetalleorden, status)
-			.subscribe(
-				(response) => {
-					this._alert.closeAlert();
-					if (response.codigo !== 0) {
-						this._alert.error(response.titulo, response.mensaje);
-						return;
+			this.api
+				.changeStatusOrderDatails(iddetalleorden, status, observacion_tercero)
+				.subscribe(
+					(response) => {
+						this._alert.closeAlert();
+						if (response.codigo !== 0) {
+							this._alert.error(response.titulo, response.mensaje);
+							return;
+						}
+
+						this._alert.success(response.titulo, response.mensaje);
+
+						this.get();
+					},
+					({ error }) => {
+						this._alert.closeAlert();
+						this._alert.error(error.titulo || 'Error', error.mensaje || 'Error al procesar la solicitud.');
 					}
-
-					this._alert.success(response.titulo, response.mensaje);
-
-					this.get();
-				},
-				({ error }) => {
-					this._alert.closeAlert();
-					this._alert.error(error.titulo || 'Error', error.mensaje || 'Error al procesar la solicitud.');
-				}
-			);
+				);
+		});
 	}
 
 

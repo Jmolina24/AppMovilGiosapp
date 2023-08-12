@@ -62,4 +62,29 @@ export class AlertService {
 
 		await alert.present();
 	}
+
+	async textArea(options: AlertOptions, confirmCallback = (value: any) => {}): Promise<any> {
+		const alert = await this.alertController.create({
+			inputs: [{
+				name: 'text',
+                type: 'textarea',
+                placeholder: 'Escribe aquí...',
+			}],
+			buttons: [
+				{
+					text: 'Cancelar',
+					role: 'cancel',
+				},
+				{
+					text: 'Confirmar',
+					role: 'confirm',
+					handler: (value) => {
+						confirmCallback(value);
+					}
+				}
+			],
+			...options
+		});
+		await alert.present();
+	}
 }
