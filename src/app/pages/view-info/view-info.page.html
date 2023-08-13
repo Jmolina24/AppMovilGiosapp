@@ -309,23 +309,22 @@
 									(click)="getThirdsServices(item)">
 									Asignar
 								</ion-button>
-
-								<ion-button type="ion-button"
-									class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2"
-									(click)="showPanelSupport()">
-									Visualizar soportes Iniciales
-								</ion-button>
-
-								<ion-modal #modal [isOpen]="isOpenView">
-									<ng-template>
-										<app-view-file-start class="ion-page" title="Visualizar" [items]="item.soporte"
-											action="view" [iddetalleorden]="item.iddetalleorden"
-											(selectionChange)="selectionChanged($event)"
-											(selectionCancel)="modal.dismiss(); isOpenView = false"></app-view-file-start>
-									</ng-template>
-								</ion-modal>
 							</ng-container>
 						</ng-container>
+						<ion-button type="ion-button"
+							class="transition ease-in-out delay-150 text-white bg-transparent hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center mr-2"
+							(click)="showPanelSupport()">
+							Visualizar soportes Iniciales
+						</ion-button>
+
+						<ion-modal #modal [isOpen]="isOpenView">
+							<ng-template>
+								<app-view-file-start class="ion-page" title="Visualizar" [items]="item.soporte"
+									action="view" [iddetalleorden]="item.iddetalleorden"
+									(selectionChange)="selectionChanged($event)"
+									(selectionCancel)="modal.dismiss(); isOpenView = false"></app-view-file-start>
+							</ng-template>
+						</ion-modal>
 
 						<ng-container *ngIf="getAction('upload_support')">
 							<ng-container *ngIf="item.estado === 'ASIGNADA'">
