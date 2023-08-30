@@ -80,7 +80,7 @@ export class ViewInfoDetailPage implements OnInit {
 				let soporte = JSON.parse(item.soporte);
 				soporte = soporte?.map(({ path: t, name }: any, index: number) => {
 					const url =
-						'https://demo.mainsoft.technology' +
+						'https://giosapp.mipresapp.co' +
 						t.split('/web')[1];
 					const y = url.split('.');
 					const tipo = y[y.length - 1].toUpperCase();
@@ -123,7 +123,7 @@ export class ViewInfoDetailPage implements OnInit {
 								r.soporte = r.soporte.map(
 									(t: string, index: number) => {
 										const url =
-											'https://demo.mainsoft.technology' +
+											'https://giosapp.mipresapp.co' +
 											t.split('/web')[1];
 										const y = url.split('.');
 										const tipo =

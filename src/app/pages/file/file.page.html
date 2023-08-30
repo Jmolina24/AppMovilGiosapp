@@ -134,9 +134,18 @@
 				<ng-container *ngIf="file.estado === 'CARGADO' && file.soporte">
 					<div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
 						<span>{{file.tiposoporte}} - {{ file.index }}</span>
-						<img [src]="file.soporte" [alt]="file.tiposoporte">
+						<ng-container [ngSwitch]="file.tipo">
+							<ng-container *ngSwitchCase="'MP4'">
+								<video>
+									<source [src]="file.soporte">
+								</video>
+							</ng-container>
+							<ng-container *ngSwitchDefault>
+								<img [src]="file.soporte" [alt]="file.tiposoporte">
+							</ng-container>
+						</ng-container>
 
-						<div class="w-full px-5">
+						<div class="w-full px-5 my-2">
 							<a (click)="download(file.soporte)"
 								class="flex justify-center w-full bg-red-500 p-4  rounded-full tracking-wide
 						font-semibold  focus:outline-none focus:shadow-outline hover:bg-red-600 shadow-lg cursor-pointer transition ease-in duration-300 mr-2">

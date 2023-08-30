@@ -310,6 +310,12 @@ export class AddOrderPage implements OnInit {
 			return;
 		}
 
+		const f = pFileList as unknown as File[];
+		if (f.some(({ size }) => size >= 5 * 1024 * 1024)) {
+			this.presentAlert('Error', 'Algún archivo excede el tamaño máximo de 5 MB');
+			return;
+		}
+
 		this.dataDetail.soporte = pFileList.map((file: any, index: number) => ({
 			file,
 			id: new Date().getTime() + index
