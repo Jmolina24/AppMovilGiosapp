@@ -219,6 +219,17 @@ export class AddOrderPage implements OnInit {
 			return of(null);
 		}
 
+		if (data.soporte.length === 0) {
+			const detalleData = {
+				...data,
+				idorden: response.idorden,
+				iddetalleorden: '0',
+				soporte: JSON.stringify([])
+			};
+
+			return this._orders.createDetail(detalleData);
+		}
+
 		const formData = new FormData();
 
 		data.soporte.forEach(({ file }: any) => {
