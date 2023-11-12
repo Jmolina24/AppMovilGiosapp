@@ -42,6 +42,10 @@ const routes: Routes = [
 	},  {
     path: 'view-file-start',
     loadChildren: () => import('./pages/view-file-start/view-file-start.module').then( m => m.ViewFileStartPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   }
 
 

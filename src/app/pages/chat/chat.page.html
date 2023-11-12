@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>CHAT</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<div class="chat">
+		<div class="messages" id="chat">
+			<!-- <div class="time">Today at 11:41</div> -->
+			<ng-container *ngFor="let message of messages">
+				<ng-container
+					*ngIf="message.from === 'ME'; else messageResponse"
+				>
+					<div class="message message-send">
+						<span>{{ message.text }}</span>
+						<span class="message-support" *ngIf="message.support">
+							<a [href]="message.support">SOPORTE</a>
+						</span>
+					</div>
+
+
+					<ng-container *ngIf="message.support">
+						<ng-container *ngFor="let item of message.support">
+							<div class="message message-send">
+								<ion-thumbnail>
+									<img [src]="item.base64" alt="" srcset="">
+								</ion-thumbnail>
+							</div>
+						</ng-container>
+					</ng-container>
+				</ng-container>
+
+				<ng-template #messageResponse>
+					<div class="message message-response">
+						{{ message.text }}
+					</div>
+				</ng-template>
+			</ng-container>
+
+			<ng-container *ngIf="isWriting">
+				<div class="message message-response">
+					<div class="typing typing-1"></div>
+					<div class="typing typing-2"></div>
+					<div class="typing typing-3"></div>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-item-group *ngIf="files.length > 0">
+			<ion-item-divider>
+				<ion-label>Archivos Adjuntos</ion-label>
+			</ion-item-divider>
+			<ng-container *ngFor="let file of files">
+				<ion-item>
+					<ion-label>
+						<p>
+							{{ file.file.name }}
+						</p>
+					</ion-label>
+					<ion-icon name="close-circle-outline" slot="end"></ion-icon>
+					<!-- <ion-progress-bar [value]="'10'"></ion-progress-bar> -->
+				</ion-item>
+			</ng-container>
+		</ion-item-group>
+
+		<ion-item class="input" lines="none">
+			<label for="file">
+				<ion-icon name="attach-outline"></ion-icon>
+			</label>
+			<input type="file" id="file"
+			type="file" (change)="onFileChange($event.target)" accept="image/png, image/jpeg" multiple />
+			<input
+				placeholder="Ingresar mensaje"
+				type="text"
+				[(ngModel)]="messageText"
+			/>
+			<ion-button (click)="sendMessage()">
+				<ion-icon name="send-outline"></ion-icon>
+			</ion-button>
+		</ion-item>
+	</ion-toolbar>
+</ion-footer>
