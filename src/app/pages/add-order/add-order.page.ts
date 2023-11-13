@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Observable, catchError, forkJoin, of, switchMap, throwError } from 'rxjs';
+import {
+	Observable,
+	catchError,
+	forkJoin,
+	of,
+	switchMap,
+	throwError,
+} from 'rxjs';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { FilesService } from 'src/app/core/services/files.service';
 import { OrdersService } from 'src/app/core/services/order.service';
@@ -100,7 +107,7 @@ export class AddOrderPage implements OnInit {
 			cantidad: '',
 			referencia: '',
 			observacion: '',
-			soporte: []
+			soporte: [],
 		};
 		this.addService = false;
 	}
@@ -158,6 +165,80 @@ export class AddOrderPage implements OnInit {
 				);
 			}
 		);
+	}
+
+	fnCreateOnlyOrder(): void {
+		this.present();
+
+		const { idcliente, idclientesede, observacion } = this.data;
+
+		if (Object.values([idcliente, idclientesede]).every((e) => !e)) {
+			this.dismiss();
+			this.presentAlert(
+				'Error',
+				'Ingrese los campos requeridos.'
+			);
+
+			return;
+		}
+
+		// this._orders.create({
+		// 	idclientesede,
+		// 	observacion,
+		// 	fechaentrega: '',
+		// 	horaentrega: '',
+		// 	idorden: '',
+		// 	idtipoorden: ''
+		// }).subscribe(
+		// 	(response) => {
+		// 		if (response.codigo !== 0) {
+		// 			this.presentAlert(response.titulo, response.mensaje);
+		// 			return;
+		// 		}
+		// 		forkJoin(
+		// 			this.listDetails.map((e) => this.createDetail(response, e))
+		// 		).subscribe(
+		// 			(r: any[]) => {
+		// 				const i = r.filter((element) => element.codigo !== 0);
+		// 				if (i.length > 0) {
+		// 					this.presentAlert('Error', i.join(', '));
+		// 					return;
+		// 				}
+
+		// 				this.dismiss();
+		// 				this.presentAlert(
+		// 					response.mensaje,
+		// 					'Orden y Detalle(s) de Orden Creados Correctamente...'
+		// 				);
+
+		// 				this.clear();
+		// 			},
+		// 			({ error }) => {
+		// 				this.dismiss();
+		// 				this.presentAlert(
+		// 					'Error',
+		// 					error.mensaje || 'Error al procesar la solicitud.'
+		// 				);
+		// 			}
+		// 		);
+		// 	},
+		// 	(error) => {
+		// 		this.dismiss();
+		// 		this.presentAlert(
+		// 			'Error',
+		// 			error.mensaje || 'Error al procesar la solicitud.'
+		// 		);
+		// 	}
+		// );
+
+
+		this.dismiss();
+		this.presentAlert(
+			'Completamente',
+			'Orden Creados Correctamente...'
+		);
+
+		this.clear();
 	}
 
 	create(): Observable<any> {
@@ -224,7 +305,7 @@ export class AddOrderPage implements OnInit {
 				...data,
 				idorden: response.idorden,
 				iddetalleorden: '0',
-				soporte: JSON.stringify([])
+				soporte: JSON.stringify([]),
 			};
 
 			return this._orders.createDetail(detalleData);
@@ -238,7 +319,10 @@ export class AddOrderPage implements OnInit {
 
 		return this._file.upload(formData).pipe(
 			switchMap(({ rutas }) => {
-				const soporte = rutas.map(({ path, originalname }: any) => ({ path, name: originalname }));
+				const soporte = rutas.map(({ path, originalname }: any) => ({
+					path,
+					name: originalname,
+				}));
 
 				return this._orders.createDetail({
 					referencia: '',
@@ -247,9 +331,9 @@ export class AddOrderPage implements OnInit {
 					idorden: response.idorden,
 					iddetalleorden: '0',
 					soporte: JSON.stringify(soporte),
-				})
+				});
 			}),
-			catchError(error => {
+			catchError((error) => {
 				return throwError(error); // or throwError(error) if you want to propagate the error
 			})
 		);
@@ -323,17 +407,22 @@ export class AddOrderPage implements OnInit {
 
 		const f = pFileList as unknown as File[];
 		if (f.some(({ size }) => size >= 5 * 1024 * 1024)) {
-			this.presentAlert('Error', 'Algún archivo excede el tamaño máximo de 5 MB');
+			this.presentAlert(
+				'Error',
+				'Algún archivo excede el tamaño máximo de 5 MB'
+			);
 			return;
 		}
 
 		this.dataDetail.soporte = pFileList.map((file: any, index: number) => ({
 			file,
-			id: new Date().getTime() + index
+			id: new Date().getTime() + index,
 		}));
 	}
 
 	deleteFile(id: number): void {
-		this.dataDetail.soporte = this.dataDetail.soporte.filter((r: any) => r.id !== id);
+		this.dataDetail.soporte = this.dataDetail.soporte.filter(
+			(r: any) => r.id !== id
+		);
 	}
 }
