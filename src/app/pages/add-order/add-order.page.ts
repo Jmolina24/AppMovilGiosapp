@@ -235,7 +235,7 @@ export class AddOrderPage implements OnInit {
 		this.dismiss();
 		this.presentAlert(
 			'Completamente',
-			'Orden Creados Correctamente...'
+			'Orden Creada Correctamente... Orden No. #' + new Date().getTime().toString()[0]
 		);
 
 		this.clear();
